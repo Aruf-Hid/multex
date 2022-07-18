@@ -1,5 +1,5 @@
 if(getid("AR_Shortlink")!=null||getid("AR_Safelink")!=null){
-  ldCss("https://rawcdn.githack.com/arufxuenzaku/blogger/7aa45322094039f199495072225b87c507a803b0/theme/apmody/plugin/css/form.css","plugin-form-css",(function(){
+  ldCss(bsGtb+"plugin/css/form.css","plugin-form-css",(function(){
     /* shortlink html */
     null!=getid("AR_Shortlink")&&"undefined"!=typeof oShortlink&&(getid("AR_Shortlink").innerHTML='<div class="inp"><input type="text" class="i_lnk" placeholder="'+oShortlink.txInp+'"/><button class="button gen">'+oShortlink.tbGen+'</button></div><div class="rst h"><input type="text" class="r_lnk"/><button class="button cpy">'+oShortlink.tbCpy+"</button></div>");
     /* end shortlink html */
@@ -35,7 +35,7 @@ function idPlug(s){if(s){var u=xAR.d(s);cxPlug(u)}else xAR.gAj({url:"/feeds/post
 
 function cxPlug(x){
 xAR.gAj({
-  url: "https://script.google.com/macros/s/AKfycbyyoQj7JnyJIyQUMXfckLorkbXJSsEu3E1b7epQzBspQP_vA9o-0pySO8Gu_mPW6hly/exec",
+  url: "https://script.google.com/macros/s/AKfycbyMK179NFmtdItQUqEWn6LrCRWiINJ_93RRY5o5JaqjGwD7q2M8llayBb0IeeKqkbD7mA/exec",
   async: !0,
   success: function(e) {
     var o = JSON.parse(e).plugin, t = o.findIndex((function(o){return o.id == x}));
