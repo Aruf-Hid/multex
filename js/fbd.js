@@ -7,9 +7,58 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 
     if(ARtb.firebase.counter.enable){
     	/*read view dl, write view*/
-	    for(var dD=qSell(".pApGm .pThmb>.iFxd[data-id],.pApGm .pAG"),dB=firebase.database(),n=0;n<dD.length;n++){var i=dD[n],dC=i.getAttribute("data-id");(dC=dB.ref("BlogID_"+blogId+"/"+dC)).once("value",function(a,d){return function(i){var n=i.exists()&&null!=i.val()._view?i.val()._view:0,s=i.exists()&&null!=i.val()._dl?i.val()._dl:0;a.classList.contains("p")?(n>0||s>0)&&(a.innerHTML+='<div><div><small>Views</small><span class="vw">'+xAR.nwc(n)+'x</span></div><div><small>Downloaded</small><span class="dl">'+xAR.nwc(s)+"x</span></div></div>"):a.classList.contains("s")||(s>0&&a.insertAdjacentHTML("afterend",'<div class="iFxd dl"><span data-text="'+xAR.abv(s)+'">'+ARtb.firebase.counter.iconDl+"</span></div>"),n>0&&a.insertAdjacentHTML("afterend",'<div class="iFxd vw"><span data-text="'+xAR.abv(n)+'">'+ARtb.firebase.counter.iconView+"</span></div>"),addCt(a,"s")),"true"==a.getAttribute("data-inc")&&(n+=1,d.update({_view:n}))}}(i,dC))}
+	    for (var dD = qSell(".pThmb>.iFxd[data-id], .ps.post[data-id]"), dB = firebase.database(), n = 0; n < dD.length; n++) {
+	    	var i = dD[n],
+	    		dC = i.getAttribute("data-id");
+	    	(dC = dB.ref("BlogID_" + blogId + "/" + dC)).once("value", function(a, d) {
+	    		return function(i) {
+	    			var n = i.exists() && null != i.val()._view ? i.val()._view : 0,
+	    				s = i.exists() && null != i.val()._dl ? i.val()._dl : 0;
+
+	    			if(a.classList.contains("ps")){
+	    				if((n > 0 || s > 0)){
+	    					var eVw = a.querySelector("span[dt-vw]");
+	    					var eDl = a.querySelector("span[dt-vw]");
+
+	    					if(eVw!=null){
+	    						eVw.setAttribute("dt-vw", xAR.nwc(n));
+	    						eVw.innerText = xAR.nwc(n) + "x";
+	    					}
+
+	    					if(eDl!=null){
+	    						eVw.setAttribute("dt-dl", xAR.nwc(s));
+	    						eDl.innerText = xAR.nwc(s) + "x";
+	    					}
+
+	    				}
+	    			}else{
+	    				if(!a.classList.contains("s")){
+	    					
+	    					if(s > 0){
+			    				a.insertAdjacentHTML("afterend", '<div class="iFxd dl"><span data-text="' + xAR.abv(s) + '">' + ARtb.firebase.counter.iconDl + "</span></div>");
+	    					}
+
+	    					if(n > 0){
+								a.insertAdjacentHTML("afterend", '<div class="iFxd vw"><span data-text="' + xAR.abv(n) + '">' + ARtb.firebase.counter.iconView + "</span></div>");
+	    					}	    	
+
+							addCt(a, "s")
+
+	    				}
+	    			}
+
+	    			"true" == a.getAttribute("data-inc") && (n += 1, d.update({
+	    				_view: n
+	    			}))
+
+	    		}
+	    	}(i, dC))
+	    }
+
+
+
 	    /*write dl*/
-	    qSell("#ldApGm > *, .bApGm, .btnDL").forEach((a=>{a.addEventListener("click",(l=>{if(!a.classList.contains("o")){a.classList.add("o");var s=firebase.database().ref("BlogID_"+blogId+"/"+postId);s.once("value",(a=>{var l=a.exists()&&null!=a.val()._dl?a.val()._dl:0;l+=1,s.update({_dl:l})}))}}))}));
+	    qSell(".ldApGm > *, .bApGm, .btnDL").forEach((a=>{a.addEventListener("click",(l=>{if(!a.classList.contains("o")){a.classList.add("o");var s=firebase.database().ref("BlogID_"+blogId+"/"+postId);s.once("value",(a=>{var l=a.exists()&&null!=a.val()._dl?a.val()._dl:0;l+=1,s.update({_dl:l})}))}}))}));
 	}
 
 	if(ARtb.firebase.clap.enable){/*CLAP*/
@@ -31,7 +80,32 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 });
 
 /*read view dl*/
-if(ARtb.firebase.counter.enable)function _CvdAG(){dD=qSell(".pApGm .pThmb>.iFxd[data-id],.pApGm .pAG");for(var a=firebase.database(),e=0;e<dD.length;e++){var t=dD[e],i=t.getAttribute("data-id");(i=a.ref("BlogID_"+blogId+"/"+i)).once("value",function(a,e){return function(e){var t=e.exists()&&null!=e.val()._view?e.val()._view:0,i=e.exists()&&null!=e.val()._dl?e.val()._dl:0;a.classList.contains("s")||(i>0&&a.insertAdjacentHTML("afterend",'<div class="iFxd dl"><span data-text="'+xAR.abv(i)+'">'+ARtb.firebase.counter.iconDl+"</span></div>"),t>0&&a.insertAdjacentHTML("afterend",'<div class="iFxd vw"><span data-text="'+xAR.abv(t)+'">'+ARtb.firebase.counter.iconView+"</span></div>"),addCt(a,"s"))}}(t))}}
+if (ARtb.firebase.counter.enable) {
+	function _CvdAG() {
+		dD = qSell(".pThmb>.iFxd[data-id], .ps.post[data-id]");
+		for (var a = firebase.database(), e = 0; e < dD.length; e++) {
+			var t = dD[e],
+				i = t.getAttribute("data-id");
+			(i = a.ref("BlogID_" + blogId + "/" + i)).once("value", function(a, e) {
+				return function(e) {
+					var t = e.exists() && null != e.val()._view ? e.val()._view : 0,
+						i = e.exists() && null != e.val()._dl ? e.val()._dl : 0;
+					
+					if(!a.classList.contains("s")){
+						i > 0 && a.insertAdjacentHTML("afterend", '<div class="iFxd dl"><span data-text="' + xAR.abv(i) + '">' + ARtb.firebase.counter.iconDl + "</span></div>");
+						t > 0 && a.insertAdjacentHTML("afterend", '<div class="iFxd vw"><span data-text="' + xAR.abv(t) + '">' + ARtb.firebase.counter.iconView + "</span></div>");
+						addCt(a, "s")
+					}
+
+
+				}
+			}(t))
+		}
+	}	
+}
+
+
+
 
 }
 /*]]>*/
