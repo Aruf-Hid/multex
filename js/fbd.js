@@ -16,7 +16,9 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 	    				s = i.exists() && null != i.val()._dl ? i.val()._dl : 0;
 
 	    			if(a.classList.contains("ps")){
-	    				if((n > 0 || s > 0)){
+	    				var hC = a.getAttribute("hide-counter");
+
+	    				if((n > 0 || s > 0) && (hC==null || (hC!=null && hC!="true"))){
 	    					var eVw = a.querySelector("span[dt-vw]");
 	    					var eDl = a.querySelector("span[dt-dl]");
 
@@ -31,6 +33,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 	    					}
 
 	    				}
+
 	    			}else{
 	    				var hC = a.parentElement.parentElement.getAttribute("hide-counter");
 	    				
