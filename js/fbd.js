@@ -32,6 +32,12 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 	    						eDl.innerText = xAR.nwc(s) + "x";
 	    					}
 
+	    					var lWb = qSel(".arWG > :last-child");
+	    					if(lWb!=null){
+	    						var arVw = '<span data-text="'+ xAR.abv(n) +'" class="wbVw">' + ARtb.firebase.counter.iconView + '</span>';
+	    						lWb.insertAdjacentHTML("beforebegin", arVw);
+	    					}
+
 	    				}
 
 	    			}else{
