@@ -94,7 +94,9 @@ if (ARtb.firebase.counter.enable) {
 					var t = e.exists() && null != e.val()._view ? e.val()._view : 0,
 						i = e.exists() && null != e.val()._dl ? e.val()._dl : 0;
 					
-					if(!a.classList.contains("s")){
+					var hC = a.parentElement.parentElement.getAttribute("hide-counter");
+					
+					if(!a.classList.contains("s") && (hC==null || (hC!=null && hC!="true")) ){
 						i > 0 && a.insertAdjacentHTML("afterend", '<div class="iFxd dl"><span data-text="' + xAR.abv(i) + '">' + ARtb.firebase.counter.iconDl + "</span></div>");
 						t > 0 && a.insertAdjacentHTML("afterend", '<div class="iFxd vw"><span data-text="' + xAR.abv(t) + '">' + ARtb.firebase.counter.iconView + "</span></div>");
 						addCt(a, "s")
