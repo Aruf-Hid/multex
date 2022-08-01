@@ -26,7 +26,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 	    					}
 
 	    					if(eDl!=null){
-	    						eVw.setAttribute("dt-dl", xAR.nwc(s));
+	    						eDl.setAttribute("dt-dl", xAR.nwc(s));
 	    						eDl.innerText = xAR.nwc(s) + "x";
 	    					}
 
