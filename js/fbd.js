@@ -32,7 +32,9 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 
 	    				}
 	    			}else{
-	    				if(!a.classList.contains("s")){
+	    				var hC = a.parentElement.parentElement.getAttribute("hide-counter");
+	    				
+	    				if(!a.classList.contains("s") && (hC==null || (hC!=null && hC!="true")) ){
 	    					
 	    					if(s > 0){
 			    				a.insertAdjacentHTML("afterend", '<div class="iFxd dl"><span data-text="' + xAR.abv(s) + '">' + ARtb.firebase.counter.iconDl + "</span></div>");
@@ -45,6 +47,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 							addCt(a, "s")
 
 	    				}
+
 	    			}
 
 	    			"true" == a.getAttribute("data-inc") && (n += 1, d.update({
