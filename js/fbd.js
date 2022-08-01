@@ -18,7 +18,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "h
 	    			if(a.classList.contains("ps")){
 	    				if((n > 0 || s > 0)){
 	    					var eVw = a.querySelector("span[dt-vw]");
-	    					var eDl = a.querySelector("span[dt-vw]");
+	    					var eDl = a.querySelector("span[dt-dl]");
 
 	    					if(eVw!=null){
 	    						eVw.setAttribute("dt-vw", xAR.nwc(n));
