@@ -5,7 +5,8 @@ if("undefined"!=typeof xAo){/*begin*/
 
 /*bkm*/1==ARtb.bookmark.enable&&ldCss(bsGtb+"css/bkm.css","bkm-css",(function(){ldJs(bsGtb+"js/bkm.js","bkm-js",!0,"body")}));
 
-/*rpst*/isPs&&!isPvb&&(null!=getid("aRel")&&ldJs(bsGtb+"js/aRel.js","aRel-js",!0,"body"),null!=getid("pPvNx")&&ldJs(bsGtb+"js/pPvNx.js","pPvNx-js",!0,"body"));
+/*rpst*/
+// isPs&&!isPvb&&(null!=getid("aRel")&&ldJs(bsGtb+"js/aRel.js","aRel-js",!0,"body"),null!=getid("pPvNx")&&ldJs(bsGtb+"js/pPvNx.js","pPvNx-js",!0,"body"));
 
 /*dAdb*/function adBLockD(){fixedNotif('<div class="dtAdB">'+ARtb.antiAdBlock.icon+"<h5>"+ARtb.antiAdBlock.title+"</h5>"+ARtb.antiAdBlock.text+"</div>"),1==ARtb.antiAdBlock.close&&(qSel(".dtAdB").insertAdjacentHTML('afterend','<span class="cls"></span>'),qSel("#fNtf .cls").addEventListener("click",(function(){addCt(getid("fNtf"),"hidden")})))}
 
