@@ -27,7 +27,7 @@
 
   autoRelatedPosts = function(a) {
     var p = "",
-      c = getid(t.relOuter),
+      c = geId(t.relOuter),
       d = l(a.feed.entry);
     if (psLabels.includes("_Apps") || psLabels.includes("_Games")) var u = '<ol class="autoRpst nApGm">';
     else u = '<ol class="autoRpst">';
@@ -81,7 +81,7 @@
       n(t.homePgUrl.replace(/\/$/, "") + "/feeds/posts/summary" + rpLabel + "?alt=json-in-script&orderby=updated&start-index=" + startIndex + "&max-results=" + maxResults + "&callback=autoRelatedPosts");
     }else {
       // console.log('Related Post Tidak Ada');
-      getid(t.relOuter).parentNode.remove();
+      geId(t.relOuter).parentNode.remove();
     }
   },
 
