@@ -1,7 +1,7 @@
 /*<![CDATA[*/
 if("undefined"!=typeof xAo){
-ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, "head", function() {
-  ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js", "fb-db", !0, "head", function() {
+ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, function() {
+  ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js", "fb-db", !0, function() {
 
     firebase.initializeApp({databaseURL:ARtb.firebase.db});
 
