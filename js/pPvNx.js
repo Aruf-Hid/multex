@@ -21,7 +21,7 @@
   arAutoPrevNext = function(a) {
 
     var p = "",
-      c = getid(t.relOuter),
+      c = geId(t.relOuter),
       d = a.feed.entry.reverse();
 
     if (psLabels.includes("_Apps") || psLabels.includes("_Games")) var u = '<div class="pPvNx nApGm">';
@@ -113,7 +113,7 @@
       }
 
     }else{
-      getid(t.relOuter).remove();
+      geId(t.relOuter).remove();
     }
 
   },
