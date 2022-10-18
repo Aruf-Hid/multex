@@ -14,15 +14,6 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
     // Sign Anonym
     auth.signInAnonymously().then(function() {
       console.log('Login Anonym..')
-    }).catch(function(err) {
-      err.code, 
-      err.message
-    });
-
-    /*status login*/
-    auth.onAuthStateChanged(function (user) {
-      if(user){
-      	console.log('Sudah Login..');
 
 
 
@@ -113,10 +104,19 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 
 
 
-      }else{
-      	console.log('Belum Login..')
-      }
-     });
+    }).catch(function(err) {
+      err.code, 
+      err.message
+    });
+
+    /*status login*/
+    // auth.onAuthStateChanged(function (user) {
+    //   if(user){
+    //   	console.log('Sudah Login..');
+    //   }else{
+    //   	console.log('Belum Login..')
+    //   }
+    //  });
 
 
   });
