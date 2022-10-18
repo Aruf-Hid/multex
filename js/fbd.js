@@ -1,9 +1,31 @@
 /*<![CDATA[*/
-if("undefined"!=typeof xAo){
-ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, function() {
-  ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js", "fb-db", !0, function() {
+if(xAo){
+ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, function() {
+  ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js", "fb-auth", !0, function() {
+  ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js", "fb-db", !0, function() {
 
-    firebase.initializeApp({databaseURL:ARtb.firebase.db});
+    firebase.initializeApp({
+    	apiKey: ARtb.firebase.key,
+    	databaseURL:ARtb.firebase.db
+    });
+
+    var auth = firebase.auth();
+
+    // Sign Anonym
+    auth.signInAnonymously().then(function() {
+      console.log('Login Anonym..')
+    }).catch(function(err) {
+      err.code, 
+      err.message
+    });
+
+    /*status login*/
+    auth.onAuthStateChanged(function (user) {
+      if(user){
+      	console.log('Sudah Login..');
+
+
+
 
     if(ARtb.firebase.counter.enable){
     	/*read view dl, write view*/
@@ -70,7 +92,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, fu
 
 
 	    /*write dl*/
-	    qSell(".ldApGm > *, .bApGm, .btnDL").forEach((a=>{a.addEventListener("click",(l=>{if(!a.classList.contains("o")){a.classList.add("o");var s=firebase.database().ref("BlogID_"+blogId+"/"+postId);s.once("value",(a=>{var l=a.exists()&&null!=a.val()._dl?a.val()._dl:0;l+=1,s.update({_dl:l})}))}}))}));
+	    qSell(".ldApGm .cnt > .ld, .bApGm, .btnDL").forEach((a=>{a.addEventListener("click",(l=>{if(!a.classList.contains("o")){a.classList.add("o");var s=firebase.database().ref("BlogID_"+blogId+"/"+postId);s.once("value",(a=>{var l=a.exists()&&null!=a.val()._dl?a.val()._dl:0;l+=1,s.update({_dl:l})}))}}))}));
 	}
 
 	if(ARtb.firebase.clap.enable){/*CLAP*/
@@ -88,6 +110,16 @@ ldJs("https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js", "fb-ap", !0, fu
 		}
 	}
 
+
+
+
+      }else{
+      	console.log('Belum Login..')
+      }
+     });
+
+
+  });
   });
 });
 
