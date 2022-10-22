@@ -12,8 +12,22 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 
     // apc-ARUEF
     // 768CAC86-5AA3-4658-9E36-E72FC95C50EC
+    const appCheckCustomProvider = {
+      getToken: () => {
+        return new Promise((resolve, _reject) => {
+          const appCheckToken = {
+            token: tokenFromServer,
+            expireTimeMillis: expirationFromServer * 1000
+          };
+          resolve(appCheckToken);
+        });
+      }
+    };
+
     const appCheck = firebase.appCheck();
     appCheck.activate("6Ld6vJ8iAAAAAMPYRjWsWfraGM6Xw2XVvK8DwfRg", true);
+
+
 
     var auth = firebase.auth();
 
