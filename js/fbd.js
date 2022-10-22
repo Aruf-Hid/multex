@@ -7,25 +7,27 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 
     firebase.initializeApp({
     	apiKey: ARtb.firebase.key,
-    	databaseURL:ARtb.firebase.db
+    	databaseURL:ARtb.firebase.db,
+    	
+	 	authDomain: "apmody-by-ar.firebaseapp.com",
+	 	projectId: "apmody-by-ar",
+		storageBucket: "apmody-by-ar.appspot.com",
+		messagingSenderId: "680712225091",
+		appId: "1:680712225091:web:9646b8bad20019cf44eff6"
     });
 
     // apc-ARUEF
     // 768CAC86-5AA3-4658-9E36-E72FC95C50EC
-    const appCheckCustomProvider = {
-      getToken: () => {
-        return new Promise((resolve, _reject) => {
-          const appCheckToken = {
-            token: tokenFromServer,
-            expireTimeMillis: expirationFromServer * 1000
-          };
-          resolve(appCheckToken);
-        });
-      }
-    };
 
     const appCheck = firebase.appCheck();
-    appCheck.activate("6Ld6vJ8iAAAAAMPYRjWsWfraGM6Xw2XVvK8DwfRg", true);
+    // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
+    // key is the counterpart to the secret key you set in the Firebase console.
+    appCheck.activate(
+      '6Ld6vJ8iAAAAAMPYRjWsWfraGM6Xw2XVvK8DwfRg',
+
+      // Optional argument. If true, the SDK automatically refreshes App Check
+      // tokens as needed.
+      true);
 
 
 
