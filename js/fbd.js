@@ -104,7 +104,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 		/*read Clap*/
 		let fDb,eClp=geId("arClap");(fDb=firebase.database().ref("BlogID_"+blogId+"/"+idps)).once("value",function(a,t){return function(t){let e=t.exists()&&null!=t.val()._clap?t.val()._clap:0;e>0&&(a.setAttribute("d-val",e),a.setAttribute("data-text",xAR.abv(e)))}}(eClp));
 		/*LS Clap*/
-		if(null!=xAR.gLS("xUID"))let nmVtLS=xAR.gLS("xUID");else{xAR.sLS("xUID",xUID);nmVtLS=xUID}
+		let nmVtLS;null!=xAR.gLS("xUID")?nmVtLS=xAR.gLS("xUID"):(xAR.sLS("xUID",xUID),nmVtLS=xUID);
 		const LS_CLP_PS="Vote_"+nmVtLS;let objClpPs={},giClpPs=xAR.gLS(LS_CLP_PS);
 		function synClpPs(s,P,S){switch(s){case"ADD":case"UPD":xAR.gLS(LS_CLP_PS)&&(objClpPs=JSON.parse(xAR.gLS(LS_CLP_PS))),objClpPs[P]=S;break;case"DEL":delete objClpPs[P]}xAR.sLS(LS_CLP_PS,JSON.stringify(objClpPs))}
 		/*write Clap*/
