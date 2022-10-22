@@ -99,7 +99,8 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 	if(ARtb.firebase.clap.enable){/*CLAP*/
 		if(isIt){
 		if(null!=qSel(".arWG")){let htmlClap='<span class="wbClap" id="arClap">'+ARtb.firebase.clap.icon+"</span>";qSel(".arWG").insertAdjacentHTML("afterbegin",htmlClap)}
-		if(postId)let idps=postId;else idps=pageId;
+		
+		let idps=postId||pageId;
 		/*read Clap*/
 		let fDb,eClp=geId("arClap");(fDb=firebase.database().ref("BlogID_"+blogId+"/"+idps)).once("value",function(a,t){return function(t){let e=t.exists()&&null!=t.val()._clap?t.val()._clap:0;e>0&&(a.setAttribute("d-val",e),a.setAttribute("data-text",xAR.abv(e)))}}(eClp));
 		/*LS Clap*/
