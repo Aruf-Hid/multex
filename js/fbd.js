@@ -1,6 +1,7 @@
 /*<![CDATA[*/
 if(xAo){
 ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, function() {
+  ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js", "fb-apc", !0, function() {
   ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js", "fb-auth", !0, function() {
   ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js", "fb-db", !0, function() {
 
@@ -8,6 +9,11 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
     	apiKey: ARtb.firebase.key,
     	databaseURL:ARtb.firebase.db
     });
+
+    // apc-ARUEF
+    // 768CAC86-5AA3-4658-9E36-E72FC95C50EC
+    const appCheck = firebase.appCheck();
+    appCheck.activate("6Ld6vJ8iAAAAAMPYRjWsWfraGM6Xw2XVvK8DwfRg", true);
 
     var auth = firebase.auth();
 
@@ -111,6 +117,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 
 
 
+  });
   });
   });
 });
