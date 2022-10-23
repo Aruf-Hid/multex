@@ -30,10 +30,13 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 
     if(ARtb.firebase.counter.enable){
     	/*read view dl, write view*/
-	    for (let dD = qSell(".pThmb>.iFxd[data-id], .ps.post[data-id]"), dB = firebase.database(), n = 0; n < dD.length; n++) {
+	    for (let dD = qSell(".pThmb>.iFxd[data-id], .ps.post[data-id]"), n = 0; n < dD.length; n++) {
 	    	let i = dD[n],
-	    		dC = i.getAttribute("data-id");
-	    	(dC = dB.ref("BlogID_" + blogId + "/" + dC)).once("value", function(a, d) {
+	    		dC = i.getAttribute("data-id"),
+	    		dB = firebase.database().ref("BlogID_" + blogId + "/" + dC);
+
+	    	dB.once("value", function(a) {
+
 	    		return function(i) {
 	    			let n = i.exists() && null != i.val()._view ? i.val()._view : 0,
 	    				s = i.exists() && null != i.val()._dl ? i.val()._dl : 0;
@@ -82,12 +85,12 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 
 	    			}
 
-	    			"true" == a.getAttribute("data-inc") && (n += 1, d.update({
+	    			"true" == a.getAttribute("data-inc") && (n += 1, dB.update({
 	    				_view: n
 	    			}))
 
 	    		}
-	    	}(i, dC))
+	    	}(i))
 	    }
 
 
@@ -110,7 +113,6 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 		
 		/*write Clap*/
 		geId("arClap").addEventListener("click", (function() {
-			let l, d;
 			if (!this.classList.contains("a")) {
 				this.classList.add("a");
 				let t, a = JSON.parse(xAR.gLS(LS_CLP_PS));
@@ -118,12 +120,13 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 
 				if ((t = null != a && null != a[idps] ? a[idps] : 0) < ARtb.firebase.clap.max) {
 
-					let e, i = t + 1,
-						s = geId("arClap");
+					let dB = firebase.database().ref("BlogID_" + blogId + "/" + idps), 
+						i = t + 1,
+						l = geId("arClap");
 					
-					(e = firebase.database().ref("BlogID_" + blogId + "/" + idps)).once("value", (l = s, d = e, function(t) {
+					dB.once("value", (function(t) {
 						let a = t.exists() && null != t.val()._clap ? t.val()._clap : 0;
-						a += 1, d.update({
+						a += 1, dB.update({
 							_clap: a
 						}), l.setAttribute("d-val", a), l.setAttribute("data-text", xAR.abv(a))
 					}));
@@ -163,10 +166,14 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 if (ARtb.firebase.counter.enable) {
 	function _CvdAG() {
 		dD = qSell(".pThmb>.iFxd[data-id], .ps.post[data-id]");
-		for (let a = firebase.database(), e = 0; e < dD.length; e++) {
-			let t = dD[e],
+
+		for (let e = 0; e < dD.length; e++) {
+			
+			let dB = firebase.database(),
+				t = dD[e],
 				i = t.getAttribute("data-id");
-			(i = a.ref("BlogID_" + blogId + "/" + i)).once("value", function(a, e) {
+
+			dB.ref("BlogID_" + blogId + "/" + i).once("value", function(a) {
 				return function(e) {
 					let t = e.exists() && null != e.val()._view ? e.val()._view : 0,
 						i = e.exists() && null != e.val()._dl ? e.val()._dl : 0;
@@ -178,11 +185,10 @@ if (ARtb.firebase.counter.enable) {
 						t > 0 && a.insertAdjacentHTML("afterend", '<div class="iFxd vw"><span data-text="' + xAR.abv(t) + '">' + ARtb.firebase.counter.iconView + "</span></div>");
 						addCt(a, "s")
 					}
-
-
 				}
 			}(t))
 		}
+
 	}	
 }
 
