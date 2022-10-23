@@ -107,8 +107,39 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
 		let nmVtLS;null!=xAR.gLS("xUID")?nmVtLS=xAR.gLS("xUID"):(xAR.sLS("xUID",xUID),nmVtLS=xUID);
 		const LS_CLP_PS="Vote_"+nmVtLS;let objClpPs={},giClpPs=xAR.gLS(LS_CLP_PS);
 		function synClpPs(s,P,S){switch(s){case"ADD":case"UPD":xAR.gLS(LS_CLP_PS)&&(objClpPs=JSON.parse(xAR.gLS(LS_CLP_PS))),objClpPs[P]=S;break;case"DEL":delete objClpPs[P]}xAR.sLS(LS_CLP_PS,JSON.stringify(objClpPs))}
+		
 		/*write Clap*/
-		geId("arClap").addEventListener("click",(function(){if(!this.classList.contains("a")){this.classList.add("a");let t,a=JSON.parse(xAR.gLS(LS_CLP_PS));parseInt(this.getAttribute("d-val"));if((t=null!=a&&null!=a[idps]?a[idps]:0)<ARtb.firebase.clap.max){let e,i=t+1,s=geId("arClap");(e=firebase.database().ref("BlogID_"+blogId+"/"+idps)).once("value",(l=s,d=e,function(t){let a=t.exists()&&null!=t.val()._clap?t.val()._clap:0;a+=1,d.update({_clap:a}),l.setAttribute("d-val",a),l.setAttribute("data-text",xAR.abv(a))})),synClpPs("ADD",idps,i),toastNotif(ARtb.firebase.clap.txClp+i)}else toastNotif(ARtb.firebase.clap.txMax+t);setTimeout((function(){remCt(geId("arClap"),"a")}),1e3)}let l,d}));
+		geId("arClap").addEventListener("click", (function() {
+			let l, d;
+			if (!this.classList.contains("a")) {
+				this.classList.add("a");
+				let t, a = JSON.parse(xAR.gLS(LS_CLP_PS));
+				parseInt(this.getAttribute("d-val"));
+
+				if ((t = null != a && null != a[idps] ? a[idps] : 0) < ARtb.firebase.clap.max) {
+
+					let e, i = t + 1,
+						s = geId("arClap");
+					
+					(e = firebase.database().ref("BlogID_" + blogId + "/" + idps)).once("value", (l = s, d = e, function(t) {
+						let a = t.exists() && null != t.val()._clap ? t.val()._clap : 0;
+						a += 1, d.update({
+							_clap: a
+						}), l.setAttribute("d-val", a), l.setAttribute("data-text", xAR.abv(a))
+					}));
+
+					synClpPs("ADD", idps, i);
+					toastNotif(ARtb.firebase.clap.txClp + i);
+
+				} else toastNotif(ARtb.firebase.clap.txMax + t);
+
+				setTimeout((function() {
+					remCt(geId("arClap"), "a")
+				}), 1e3);
+			}
+		}));
+
+
 		}
 	}
 
@@ -126,6 +157,7 @@ ldJs("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js", "fb-ap", !0, f
   });
   });
 });
+
 
 /*read view dl*/
 if (ARtb.firebase.counter.enable) {
