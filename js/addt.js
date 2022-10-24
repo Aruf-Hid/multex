@@ -21,7 +21,7 @@ if(null!=qSel(".toTopF")||ARtb.progScrollbar){
 /*end progScrollbar*/
 
 
-/*No Internet*/let n=geId("noInet");null!=n&&(window.addEventListener("offline",(()=>{remCt(n,"hidden"),toastNotif("You are <b>Offline</b>")})),window.addEventListener("online",(()=>{addCt(n,"hidden"),toastNotif("You are <b>Online</b>")})));
+/*No Internet*/let noInet=geId("noInet");null!=noInet&&(window.addEventListener("offline",(()=>{remCt(noInet,"hidden"),toastNotif("You are <b>Offline</b>")})),window.addEventListener("online",(()=>{addCt(noInet,"hidden"),toastNotif("You are <b>Online</b>")})));
 
 /*Cookie Consent*/let ckWrp=geId("ckWrp"),ckAcc=geId("ckAcc");null!=ckWrp&&(null==xAR.gC("CookiePolicy")&&addCt(ckWrp,"v"),ckAcc.onclick=()=>{navigator.cookieEnabled?(addCt(ckWrp,"a"),xAR.sC("CookiePolicy","Accepted",{secure:!0,"max-age":2592e3})):fixedNotif('<svg class="line" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><line class="svgC" x1="12" x2="12" y1="8" y2="12"></line><line class="svgC" x1="12" x2="12.01" y1="16" y2="16"></line></svg> <h5>Cookie can&#039;t be set!</h5> <p>Please unblock this site from the cookie setting of your browser.</p> <a href="'+window.location.href+'">Refresh</a>')});
 
