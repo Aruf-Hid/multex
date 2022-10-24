@@ -23,7 +23,7 @@ Defer(()=>{
 });
 
 /*scroll*/
-const lazyJsc=!1;window.addEventListener('scroll',()=>{(0!=document.documentElement.scrollTop&&!1===lazyJsc||0!=document.body.scrollTop&&!1===lazyJsc)&&(!function(){
+let lazyJsc=!1;window.addEventListener('scroll',()=>{(0!=document.documentElement.scrollTop&&!1===lazyJsc||0!=document.body.scrollTop&&!1===lazyJsc)&&(!function(){
 /*adSense*/ARtb.adSense.enable&&"scroll"==ARtb.adSense.loadType&&ld_Adsense();
 /*analytics*/ARtb.analytics.enable&&"scroll"==ARtb.analytics.loadType&&ld_Analytics();
 /*abc*/ARtb.antiBoomClick.enable&&"scroll"==ARtb.antiBoomClick.loadType&&ld_Abc();
