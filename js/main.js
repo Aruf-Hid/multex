@@ -1,6 +1,6 @@
 /*<![CDATA[*/
 const adBLockD=()=>{fixedNotif('<div class="dtAdB">'+ARtb.antiAdBlock.icon+"<h5>"+ARtb.antiAdBlock.title+"</h5>"+ARtb.antiAdBlock.text+"</div>"),ARtb.antiAdBlock.close&&(qSel(".dtAdB").insertAdjacentHTML("afterend",'<span class="cls"></span>'),qSel("#fNtf .cls").addEventListener("click",(()=>{addCt(geId("fNtf"),"hidden")})))},
-ld_Adsense=()=>{var e=document.createElement("script");e.setAttribute("crossorigin","anonymous"),e.async=!0,e.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+ARtb.adSense.publisherId;var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t),e.onerror=()=>ARtb.antiAdBlock.enable&&adBLockD()},
+ld_Adsense=()=>{let e=document.createElement("script");e.setAttribute("crossorigin","anonymous"),e.async=!0,e.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+ARtb.adSense.publisherId;let t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t),e.onerror=()=>ARtb.antiAdBlock.enable&&adBLockD()},
 /**/ld_Analytics=()=>{ldJs("https://www.googletagmanager.com/gtag/js?id="+ARtb.analytics.propertyID,"analytics-js",!0)},
 ld_Abc=()=>{ldJs(bsGtb+"js/abc.js","abc-js",!0)},
 ld_Fbd=()=>{ldJs(bsGtb+"js/fbd.js","fbd-js",!0)},
