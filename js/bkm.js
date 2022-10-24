@@ -5,8 +5,8 @@
 /*content BmPs*/geId('header-icon').insertAdjacentHTML('beforeend', '<div class="cBkPs"><input class="bkmI hidden" id="offBkm" type="checkbox"/><div class="wBkm sl"><div class="bkmS fixLs"><div class="bkmH fixH fixT" data-text="'+ARtb.bookmark.title+'"><label aria-label="'+ARtb.bookmark.txClose+'" class="c cl" for="offBkm"></label></div><div id="dBmPs" class="bkmC"></div></div></div><label class="bkmCls" for="offBkm"></label></div>');
 
 /* set obj LS Bookmark, value*/
-let objBmPs={}, giBmPs=xAR.gLS(LS_BM_PS); 
-const LS_BM_PS='Bookmark_Post',
+let objBmPs={}; 
+const LS_BM_PS='Bookmark_Post', giBmPs=xAR.gLS(LS_BM_PS),
 /*null BkmPs*/nBkmPs=()=>{geId('dBmPs').innerHTML='<div class="n">'+ARtb.bookmark.noBmIcon+'<p>'+ARtb.bookmark.noBmMes+'</p><a class="button" href="'+ARtb.bookmark.noBmLink+'">'+ARtb.bookmark.noBmAll+'</a></div>'},
 /*get result BmPs*/gBmPs=(d,i)=>{let l=i.id,s=i.title,a=i.image,m=i.link;null!==geId("dBmPs")&&(geId("dBmPs").innerHTML+='<div class="item" id="bkm'+l+'"><div class="pThmb"><div class="thmb"><div class="bkmImg" style="background-image:url(\''+a+'\');"></div></div></div><div class="itmTtl"><a href="'+m+'">'+s+'</a></div><div class="del" onclick="delBmPs(\''+l+"')\">"+ARtb.bookmark.delIcon+"</div></div>"),qSell('.bmPs[bm-id="'+l+'"]').forEach((d=>{addCt(d,"a")}))},
 /*refresh BkmPs*/rBmPs=()=>{if(geId("dBmPs").innerHTML="",xAR.gLS(LS_BM_PS)){objBmPs=JSON.parse(xAR.gLS(LS_BM_PS));for(let t in objBmPs)gBmPs(t,objBmPs[t]);let t=Object.keys(objBmPs).length;t>0?(qSel(".tBkmt").setAttribute("data-text",t),remCt(qSel(".tBkmt"),"n")):(addCt(qSel(".tBkmt"),"n"),nBkmPs())}},
