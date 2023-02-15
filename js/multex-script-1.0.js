@@ -134,4 +134,150 @@ _admBlg();
   "function"==typeof dtNumb&&dtNumb();
 }));
 
+
+
+/*psByLabel begin*/
+function _psByLbl(){
+
+let numbPs = null != ARtb.psByLabel.numbPs ? ARtb.psByLabel.numbPs : 6, 
+    szThumb = null != ARtb.psByLabel.szThumb ? ARtb.psByLabel.szThumb : 120,
+    sortDt = null != ARtb.psByLabel.sortDt ? ARtb.psByLabel.sortDt : "updated",
+    lblPst = qSell(".lblPst");
+
+for (var i = 0; i < lblPst.length; i++) {
+  remCt(lblPst[i],"hidden");
+  let label = lblPst[i].querySelector(".label-item").innerText;
+  let lbl = label.length > 0 ? encodeURI("/-/" + label) : "";
+  let elC = "lblPst-item"+i;
+
+//begin
+xAR.gAj({
+  url: "/feeds/posts/summary"+lbl+"?alt=json&orderby="+sortDt+"&max-results="+numbPs,
+  async: !0,
+  success: function(e) {
+    let n = JSON.parse(e).feed.entry;
+    if(n!=null){
+    let elPs= '<div class="psLbl">';
+      n.forEach(function(dt, idx) {
+
+        const psTtl = dt.title.$t;
+            psLink = gVa(dt.link, "rel", "alternate", "href"),
+            psThumb = dt.media$thumbnail ? dt.media$thumbnail.url : "none",
+            
+            dtPub={date:new Date(dt.published.$t),year:()=>dtPub.date.getUTCFullYear(),month:()=>parseInt(dtPub.date.getUTCMonth())+1,day:()=>dtPub.date.getUTCDate(),hour:()=>dtPub.date.getUTCHours(),min:()=>dtPub.date.getUTCMinutes()},
+
+            psRate=t=>{let u=dtPub.hour(),d=dtPub.day(),e="";if("v"==t){let t=dtPub.min()%10;e=17==u||5==u?"5.0":u<12?"3."+t:"4."+t}else e=dtPub.year()+3*dtPub.month()*6*d+(6*u+1)*(2*dtPub.min()+1);return e},
+
+            dtUpd={date:new Date(dt.updated.$t),year:()=>dtUpd.date.getUTCFullYear(),month:()=>monthAb[dtUpd.date.getUTCMonth()],day:()=>dtUpd.date.getUTCDate()},
+
+            xSpr = iVa(dt.category,"term","Sponsored")>=0?!0:!1,
+            psSpr = {
+              name : gVa(dt.link,"href","spr.name","type")
+            },
+
+            xApp = iVa(dt.category,"term","_Apps")>=0||iVa(dt.category,"term","_Games")>=0?!0:!1,
+            psApp={name:gVa(dt.link,"href","name.app","type"),icon:gVa(dt.link,"href","icon.app","type"),ver:gVa(dt.link,"href","ver.app","type"),mod:gVa(dt.link,"href","mod.app","type"),txApk:""!=gVa(dt.link,"href","apk-tx.app","type")?gVa(dt.link,"href","apk-tx.app","type"):"APK",txMod:""!=gVa(dt.link,"href","mod-tx.app","type")?gVa(dt.link,"href","mod-tx.app","type"):"MOD"},
+
+            xProd = iVa(dt.category,"term","Product")>=0?!0:!1,
+            psProd= {
+              name : gVa(dt.link,"href","name.prod","type"),
+              price : gVa(dt.link,"href","price.prod","type")
+            },
+
+            xAnime = iVa(dt.category,"term","Anime")>=0?!0:!1,
+            psAnime= {
+              name : gVa(dt.link,"href","name.ani.me","type"),
+              epi : gVa(dt.link,"href","episodes.ani.me","type")
+            },
+
+            z = "";
+
+
+        
+        let pTtl = psTtl,
+            pThumb = "",
+            pRate = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ psRate("v") +'"></span></span></g-review-stars> <span>'+ psRate("v") +'</span> · ‎<span drt-count="'+ psRate() +'">'+ xAR.abv(psRate()) +'</span></div>',
+            pUpd = dtUpd.month()+" "+dtUpd.day()+", "+dtUpd.year(),
+            pDate = "",
+            clsYt = "",
+            appVM = "",
+            appAM = "",
+            clsPs = "";
+
+        // title
+        if(psApp.name!=""){
+          pTtl=psApp.name;
+        }else if(psProd.name!=""){
+          pTtl=psProd.name;
+        }
+
+        // image
+        if(xApp&&psApp.icon!=""){
+          pThumb="url('" + xSz(psApp.icon,szThumb) + "')";
+        }else if(psThumb!="none"){
+          if(psThumb.includes("img.youtube.com")){
+            pThumb = psThumb.replace("/vi/", "/vi_webp/").replace("/default.jpg", "/mqdefault.webp");
+            clsYt = " iyt"
+          }else{
+            pThumb = xSz(psThumb,szThumb);
+          }
+          pThumb="url('" + pThumb + "')";
+        }
+
+        // date
+        if(!xApp){
+          if(xSpr){
+            pDate = '<span class="pTtmp" data-tx="Ad">'+psSpr.name+'</span>';
+          }else if(xProd){
+            pDate = '<span class="pTtmp" data-tx="Price">'+psProd.price+'</span>';
+          }else{
+            pDate = '<time data-text="' + pUpd + '" data-tx="Updated" class="pTtmp"></time>';
+          }
+        }
+
+        // app
+        if(xApp){
+          if(psApp.ver!=""&&psApp.mod!=""){
+            appVM='<span class="apVM">v' + psApp.ver + " • " + psApp.mod + "</span>";
+            appAM='<div class="apAM"><span class="apk" data-text="'+psApp.txApk+'"></span><span class="mod" data-text="'+psApp.txMod+'"></span>'+pRate+'</div>';
+          }else if(psApp.ver!=""&&psApp.mod==""){
+            appVM='<span class="apVM">v' + psApp.ver +"</span>";
+            appAM='<div class="apAM"><span class="apk" data-text="'+psApp.txApk+'"></span>'+pRate+'</div>';
+          }
+          clsPs = " nApGm";
+        }
+
+
+        // console.log('pTtl : '+pTtl);
+        // console.log('pThumb : '+pThumb);
+        // console.log('pRate : '+pRate);
+        // console.log('pUpd : '+pUpd);
+
+        elPs += '<article><a class="item' + clsPs + '" aria-label="' + psTtl + '" href="' + psLink + '"><div class="iThmb pThmb' + clsYt + '"><div class="thmb"><div class="img" style="background-image: ' + pThumb + '"></div></div></div> <div class="itmTtl"><span>' + pTtl + "</span>" + pDate + appVM + appAM + "</div></a></article>";
+
+      });
+
+    elPs += "</div>";
+    geId(elC).innerHTML = elPs;
+
+    }else{
+      geId(elC).innerHTML = "<p class='note wr'>No posts yet.</p>";
+    }
+  }
+});
+//end
+
+
+}
+
+
+
+}
+
+/*run*/
+if(null != qSel(".lblPst") && isHm){
+	_psByLbl();
+}
+/*end psByLabel*/
+
 /*]]>*/
