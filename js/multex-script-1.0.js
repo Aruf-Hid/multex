@@ -44,7 +44,7 @@ const csDom = _csDom,
 	xAo = _xAo;
 
 /*Main Function*/
-if (csDom != xAo) {
+if (csDom!=1 && xAo!=1) {
   let n=null,geId=l=>n,gCls=l=>n,qSel=l=>n,qSell=l=>n;
   "undefined"!=typeof isPv?0==isPv&&(window[txO1][txO2]=txO3+window[txO1][txO2]):window[txO1][txO2]=txO3+window[txO1][txO2];
 }
