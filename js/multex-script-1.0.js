@@ -9,7 +9,15 @@ Defer.dom(".lazy", 100, "loaded", null, {rootMargin: "1px"});
 const xIdb=t=>blogId==t&&document.getElementById("admCk").getAttribute("data-id")==t,
 c_blgId=d=>{let e=xAR.en(d.feed.id.$t.split("-")[1]);xAR.sLS("_AR_blgId",e)},
 c_aBlog=e=>{let s=xAR.en(e.entry.content.$t);xAR.sLS("_AR_aBlog",s);let t=e.entry.link.filter((e=>"enclosure"==e.rel)),r={};t.forEach((e=>{let s=e.href.replace("http://","").replace(".us",""),t=e.type;r[s]=t})),xAR.sLS("_AR_Usr",xAR.en(JSON.stringify(r))),xAR.sC("_AR_sess",1,{"max-age":parseInt(r.session)})},
-_aBlog=l=>{let a=JSON.parse(xAR.de(xAR.gLS("_AR_aBlog"))).blog,e=iVa(a,"id",xAR.de(l));if(e>=0){let l=a[e];p_aBlg(l.url,null!=l.auth?l.auth:l.code),/*mainJs*//*xAo&&ldJs(bsGtb+"js/main.js","main-js",!0)*/}else P_aBlg(0,1)},
+_aBlog = l => {
+	let a = JSON.parse(xAR.de(xAR.gLS("_AR_aBlog"))).blog,
+		e = iVa(a, "id", xAR.de(l));
+	if (e >= 0) {
+		let l = a[e];
+		p_aBlg(l.url, null != l.auth ? l.auth : l.code); 
+		/*mainJs*/ /*xAo && ldJs(bsGtb + "js/main.js", "main-js", !0)*/
+	} else P_aBlg(0, 1)
+},
 p_aBlg=(o,e)=>{console.group("%cValid License","color:#57956A;font-size:12px"),console.log("License for : "+o+" | "+e),console.log("MULTEX - Blogger templates"),console.log("Demo : https://multex.aruef.com/"),console.groupEnd()},
 P_aBlg=(t,i)=>{alert("invalid license"),window[txO1][txO2]=txO3+window[txO1][txO2]},
 cxLss=s=>{if(geId("admCk").setAttribute("xid",s),xIdb(xAR.de(s))||P_aBlg(0,1),null!=xAR.gLS("_AR_aBlog"))_aBlog(s);else{let t=""!=xAR.xd(xAR.d(dLss).substring(1))?xAR.xd(xAR.d(dLss).substring(1)):xAR.xd(dLss.substring(1)),d=(t.split("-")[0],t.split("-")[1]),l=t.split("-")[2];ldJsx({src:"https://www.blogger.com/feeds/"+d+"/posts/default/"+l+"?alt=json-in-script&callback=c_aBlog",rem:!0,load:()=>{_aBlog(s)},err:()=>window[txO1][txO2]=txO3+window[txO1][txO2]})}};
