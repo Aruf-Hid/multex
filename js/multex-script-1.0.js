@@ -26,7 +26,6 @@ if(isMob){
 
 
 /*additional*/
-var thmC,thmC1=document.head.querySelector('meta[name="theme-color"]'),thmC2=document.head.querySelector('meta[name="msapplication-navbutton-color"]'),thmC3=document.head.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
 null!=xAR.gLS("mode")&&("darkmode"==xAR.gLS("mode")?(thmC=themeCdrk,qSel("body").classList.add("drK")):thmC=themeC,thmC1.content=thmC,thmC2.content=thmC,thmC3.content=thmC);
 isId&&("listmode"===xAR.gLS("list")?qSel("#mainCont").classList.add("grD"):qSel("#mainCont").classList.remove("grD"));
 
