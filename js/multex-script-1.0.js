@@ -23,8 +23,8 @@ P_aBlg=(t,i)=>{alert("invalid license"),window[txO1][txO2]=txO3+window[txO1][txO
 cxLss=s=>{if(geId("admCk").setAttribute("xid",s),xIdb(xAR.de(s))||P_aBlg(0,1),null!=xAR.gLS("_AR_aBlog"))_aBlog(s);else{let t=""!=xAR.xd(xAR.d(dLss).substring(1))?xAR.xd(xAR.d(dLss).substring(1)):xAR.xd(dLss.substring(1)),d=(t.split("-")[0],t.split("-")[1]),l=t.split("-")[2];ldJsx({src:"https://www.blogger.com/feeds/"+d+"/posts/default/"+l+"?alt=json-in-script&callback=c_aBlog",rem:!0,load:()=>{_aBlog(s)},err:()=>window[txO1][txO2]=txO3+window[txO1][txO2]})}};
 
 /*check id blog*/
-// null==xAR.gC("_AR_sess")&&(xAR.rLS("_AR_blgId"),xAR.rLS("_AR_aBlog"),xAR.rLS("_AR_Usr"));
-// if(null!=xAR.gLS("_AR_blgId")){let s=xAR.gLS("_AR_blgId");cxLss(s)}else setTimeout((()=>{ldJsx({src:"/feeds/posts/summary/?alt=json-in-script&max-results=0&callback=c_blgId",rem:!0,load:()=>{let s=xAR.gLS("_AR_blgId");cxLss(s)},err:()=>{let s=xAR.en(blogId);xAR.sLS("_AR_blgId",s),cxLss(s)}})}),0);
+null==xAR.gC("_AR_sess")&&(xAR.rLS("_AR_blgId"),xAR.rLS("_AR_aBlog"),xAR.rLS("_AR_Usr"));
+if(null!=xAR.gLS("_AR_blgId")){let s=xAR.gLS("_AR_blgId");cxLss(s)}else setTimeout((()=>{ldJsx({src:"/feeds/posts/summary/?alt=json-in-script&max-results=0&callback=c_blgId",rem:!0,load:()=>{let s=xAR.gLS("_AR_blgId");cxLss(s)},err:()=>{let s=xAR.en(blogId);xAR.sLS("_AR_blgId",s),cxLss(s)}})}),0);
 
 /*LzJs*/ 
 null==xAR.gLS("Lz_Js")&&xAR.sLS("Lz_Js",(new Date).getTime()),loadLzJs();
