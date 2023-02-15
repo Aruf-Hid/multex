@@ -26,6 +26,10 @@ if(isMob){
 
 
 /*additional*/
+var thmC,thmC1=document.head.querySelector('meta[name="theme-color"]'),thmC2=document.head.querySelector('meta[name="msapplication-navbutton-color"]'),thmC3=document.head.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+null!=xAR.gLS("mode")&&("darkmode"==xAR.gLS("mode")?(thmC=themeCdrk,qSel("body").classList.add("drK")):thmC=themeC,thmC1.content=thmC,thmC2.content=thmC,thmC3.content=thmC);
+isId&&("listmode"===xAR.gLS("list")?qSel("#mainCont").classList.add("grD"):qSel("#mainCont").classList.remove("grD"));
+
 function darkMode(){let e;qSel("body").classList.contains("drK")?(qSel("body").classList.remove("drK"),xAR.rLS("mode"),e=themeC):(qSel("body").classList.add("drK"),xAR.sLS("mode","darkmode"),e=themeCdrk),thmC1.content=e,thmC2.content=e,thmC3.content=e}
 function cImgpAG(){for(let l=qSell(".ntry.pApGm .imgThm, .ntry.pJob .imgThm"),m=0;m<l.length;m++){var t=l[m].getAttribute("alt-img"),i=l[m].getAttribute("s1x1-img"),e="";null!=t&&null!==i&&(e="listmode"!=xAR.gLS("list")?i:t,isHm&&!isMob&&(e=t),""!=e&&(l[m].setAttribute("src",e),l[m].setAttribute("data-src",e)))}}
 function gridMode(){xAR.sLS("list","listmode"===xAR.gLS("list")?"grid":"listmode"),"listmode"===xAR.gLS("list")?qSel("#mainCont").classList.add("grD"):qSel("#mainCont").classList.remove("grD"),cImgpAG()}
