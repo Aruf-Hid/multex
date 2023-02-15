@@ -275,7 +275,7 @@ xAR.gAj({
 }
 
 /*run*/
-if(null != qSel(".lblPst") && isHm){
+if(null != qSel(".lblPst") && isHm && ARtb.psByLabel.enable){
 	_psByLbl();
 }
 /*end psByLabel*/
