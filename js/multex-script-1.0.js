@@ -6,6 +6,38 @@ console.log('script loaded...');
 
 Defer.dom(".lazy", 100, "loaded", null, {rootMargin: "1px"});
 
+
+/*BEGIN*/
+let admCk=geId("admCk"),
+txO1 = "location",
+txO2 = "href",
+txO3 = "https://www.aruf.my.id/?ref=";
+
+const lcKey=null!=admCk?admCk.getAttribute("data-license"):"";
+const cIdb=t=>blogId==t&&admCk.getAttribute("data-id")==t,
+  dLss=lcKey;
+
+if ("a" == dLss.charAt(0) && "" != xAR.d(dLss) && cIdb(xAR.xd(xAR.d(dLss).substring(1)).split("-")[0]) || "x" == dLss.charAt(0) && cIdb(xAR.xd(dLss.substring(1)).split("-")[0])) var _csDom = !0,
+	_xAi = !0,
+	_xAu = !0,
+	_xAe = !0,
+	_xAo = !0;
+else _csDom = 0, _xAi = 0, _xAu = 0, _xAe = 0, _xAo = 0, _ARtb = "";
+
+const csDom = _csDom,
+	xAi = _xAi,
+	xAu = _xAu,
+	xAe = _xAe,
+	xAo = _xAo;
+
+/*Main Function*/
+if (csDom != xAo) {
+  let n=null,geId=l=>n,gCls=l=>n,qSel=l=>n,qSell=l=>n;
+  "undefined"!=typeof isPv?0==isPv&&(window[txO1][txO2]=txO3+window[txO1][txO2]):window[txO1][txO2]=txO3+window[txO1][txO2];
+}
+/*END*/
+
+
 const xIdb=t=>blogId==t&&document.getElementById("admCk").getAttribute("data-id")==t,
 c_blgId=d=>{let e=xAR.en(d.feed.id.$t.split("-")[1]);xAR.sLS("_AR_blgId",e)},
 c_aBlog=e=>{let s=xAR.en(e.entry.content.$t);xAR.sLS("_AR_aBlog",s);let t=e.entry.link.filter((e=>"enclosure"==e.rel)),r={};t.forEach((e=>{let s=e.href.replace("http://","").replace(".us",""),t=e.type;r[s]=t})),xAR.sLS("_AR_Usr",xAR.en(JSON.stringify(r))),xAR.sC("_AR_sess",1,{"max-age":parseInt(r.session)})},
