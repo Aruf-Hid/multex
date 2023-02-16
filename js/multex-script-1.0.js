@@ -48,9 +48,9 @@ c_aBlog = e => {
 			let s = e.href.replace("http://", "").replace(".id", ""),
 				t = e.type;
 			r[s] = t
-		})), xAR.sLS("_AR_Usr", xAR.en(JSON.stringify(r))), xAR.sC("_AR_sess", 1, {
-			"max-age": parseInt(r.session)
-		})		
+		})), 
+		xAR.sLS("_AR_Usr", xAR.en(JSON.stringify(r))), 
+		xAR.sC("_AR_sess", 1, {"max-age": parseInt(r.xsess)})		
 	}else{
 		P_aBlg(0, 1)
 	}
@@ -69,6 +69,7 @@ _aBlog = l => {
 },
 
 p_aBlg = (_id, _url, _code, _auth, _type) => {
+	let data = JSON.parse(xAR.de(xAR.gLS("_AR_Usr")));
 	console.groupCollapsed("%cValid License", "color:#57956A;font-size:12px"), 
 		console.groupCollapsed("License for : "),
 			console.log("ID : "+_id),
@@ -77,8 +78,8 @@ p_aBlg = (_id, _url, _code, _auth, _type) => {
 			console.log("Owner : "+_auth),
 			console.log("Type : "+_type),
 		console.groupEnd(),
-		console.groupCollapsed("MULTEX - Blogger templates"),
-			console.log("Demo : https://multex.aruef.com/"), 
+		console.groupCollapsed(data.xname),
+			console.log("Demo : "+data.xlink), 
 		console.groupEnd(),
 	console.groupEnd()
 },
