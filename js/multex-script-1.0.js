@@ -101,8 +101,9 @@ if (null != xAR.gLS("_AR_blgId")) {
 	let s = xAR.gLS("_AR_blgId");
 	cxLss(s)
 } else setTimeout((() => {
+	let dom = isPv ? blogUrl : "/";
 	ldJsx({
-		src: "/feeds/posts/summary/?alt=json-in-script&max-results=0&callback=c_blgId",
+		src: dom+"feeds/posts/summary/?alt=json-in-script&max-results=0&callback=c_blgId",
 		rem: !0,
 		load: () => {
 			let s = xAR.gLS("_AR_blgId");
