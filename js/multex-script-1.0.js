@@ -78,7 +78,7 @@ p_aBlg = (_id, _url, _code, _auth) => {
 			console.log("Owner : "+_auth),
 			console.log("Type : "+data.xtype),
 		console.groupEnd(),
-		console.groupCollapsed(data.xname),
+		console.group(data.xname),
 			console.log("Demo : "+data.xlink), 
 		console.groupEnd(),
 	console.groupEnd()
@@ -203,7 +203,7 @@ function _psByLbl(){
 let numbPs = null != ARtb.psByLabel.numbPs ? ARtb.psByLabel.numbPs : 6, 
     szThumb = null != ARtb.psByLabel.szThumb ? ARtb.psByLabel.szThumb : 120,
     sortDt = null != ARtb.psByLabel.sortDt ? ARtb.psByLabel.sortDt : "updated",
-    lblPst = qSell(".lblPst");
+    lblPst = qSell(".lblPst:not(.no-items)");
 
 for (var i = 0; i < lblPst.length; i++) {
   remCt(lblPst[i],"hidden");
@@ -340,6 +340,9 @@ if(null != qSel(".lblPst") && isHm && ARtb.psByLabel.enable){
 	_psByLbl();
 }
 /*end psByLabel*/
+
+
+
 
 
 
