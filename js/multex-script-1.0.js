@@ -1,7 +1,7 @@
 /*<![CDATA[*/
 xAR.sLS("xAR_script", (new Date).getTime() + 864e5);
 console.log('script loaded...');
-
+const ARtb = tempSet;
 const xAR2={
 	_Str:"mUlTeXbLoGgERtMpOcDjFWYZaChIkJnKqNsPvQwSzVx1357986420ByArufHid+/=",
 	en:e=>{var t,r,o,a,n,c,h,d="",s=0;for(e=xAR._utf8_en(e);s<e.length;)a=(t=e.charCodeAt(s++))>>2,n=(3&t)<<4|(r=e.charCodeAt(s++))>>4,c=(15&r)<<2|(o=e.charCodeAt(s++))>>6,h=63&o,isNaN(r)?c=h=64:isNaN(o)&&(h=64),d=d+xAR._Str.charAt(a)+xAR._Str.charAt(n)+xAR._Str.charAt(c)+xAR._Str.charAt(h);return d},
@@ -325,5 +325,13 @@ if(null != qSel(".lblPst") && isHm && ARtb.psByLabel.enable){
 	_psByLbl();
 }
 /*end psByLabel*/
+
+
+
+
+/**conf translate**/function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:ARtb.gTranslate.pageLang,includedLanguages:ARtb.gTranslate.includedLangs,layout:google.translate.TranslateElement.InlineLayout.SIMPLE},"google_translate_element")}
+/*conf analytics*/function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config",ARtb.analytics.propertyID)
+/*Push adSense*/
+if(ARtb.adSense.enable)for(let e=qSell("ins.adsbygoogle"),l=0;l<e.length;l++)e[l]&&(adsbygoogle=window.adsbygoogle||[]).push({});
 
 /*]]>*/
