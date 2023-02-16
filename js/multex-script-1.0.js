@@ -209,9 +209,7 @@ for (var i = 0; i < lblPst.length; i++) {
   remCt(lblPst[i],"hidden");
   let label = lblPst[i].querySelector(".label-item").innerText;
   let lbl = label.length > 0 ? encodeURI("/-/" + label) : "";
-  lblPst[i].querySelector(".lblPst-item").id = "lblPst-item-"+i;
-  let elC = "lblPst-item-"+i;
-  let elCx = lblPst[i].querySelector(".lblPst-item");
+  let elC = lblPst[i].querySelector(".lblPst-item");
 
 //begin
 xAR.gAj({
@@ -321,10 +319,10 @@ xAR.gAj({
       });
 
     elPs += "</div>";
-    elCx.innerHTML = elPs;
+    elC.innerHTML = elPs;
 
     }else{
-      elCx.innerHTML = "<p class='note wr'>No posts yet.</p>";
+      elC.innerHTML = "<p class='note wr'>No posts yet.</p>";
     }
   }
 });
