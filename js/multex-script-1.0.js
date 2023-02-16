@@ -50,7 +50,7 @@ c_aBlog = e => {
 			r[s] = t
 		})), 
 		xAR.sLS("_AR_Usr", xAR.en(JSON.stringify(r))), 
-		xAR.sC("_AR_sess", 1, {"max-age": parseInt(r.xsess)})		
+		xAR.sC("_AR_sess", 1, {"max-age": parseInt(r.xsess)});		
 	}else{
 		P_aBlg(0, 1)
 	}
@@ -64,6 +64,7 @@ _aBlog = l => {
 	if (e >= 0) {
 		let l = a[e];
 		p_aBlg(l.id, l.url, l.code, l.auth, l.type); 
+		var xTypeTheme = l.type;
 		/*mainJs*/ /*ldJs(bsGtb + "js/main.js", "main-js", !0)*/
 	} else P_aBlg(0, 1)
 },
