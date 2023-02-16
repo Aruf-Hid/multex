@@ -50,7 +50,7 @@ c_aBlog = e => {
 			r[s] = t
 		})), 
 		xAR.sLS("_AR_Usr", xAR.en(JSON.stringify(r))), 
-		xAR.sC("_AR_sess", 1, {"max-age": parseInt(r.xsess)});		
+		xAR.sC("_AR_sess", 1, {"max-age": parseInt(r.xsess)})		
 	}else{
 		P_aBlg(0, 1)
 	}
@@ -63,13 +63,12 @@ _aBlog = l => {
 		e = iVa(a, "id", xAR.de(l));
 	if (e >= 0) {
 		let l = a[e];
-		p_aBlg(l.id, l.url, l.code, l.auth, l.type); 
-		var xTypeTheme = l.type;
+		p_aBlg(l.id, l.url, l.code, l.auth); 
 		/*mainJs*/ /*ldJs(bsGtb + "js/main.js", "main-js", !0)*/
 	} else P_aBlg(0, 1)
 },
 
-p_aBlg = (_id, _url, _code, _auth, _type) => {
+p_aBlg = (_id, _url, _code, _auth) => {
 	let data = JSON.parse(xAR.de(xAR.gLS("_AR_Usr")));
 	console.groupCollapsed("%cValid License", "color:#57956A;font-size:12px"), 
 		console.groupCollapsed("License for : "),
@@ -77,7 +76,7 @@ p_aBlg = (_id, _url, _code, _auth, _type) => {
 			console.log("Domain : "+_url),
 			console.log("Code : "+_code),
 			console.log("Owner : "+_auth),
-			console.log("Type : "+_type),
+			console.log("Type : "+data.xtype),
 		console.groupEnd(),
 		console.groupCollapsed(data.xname),
 			console.log("Demo : "+data.xlink), 
