@@ -2,6 +2,7 @@
 xAR.sLS("xAR_script", (new Date).getTime() + 864e5);
 console.log('script loaded...');
 const ARtb = tempSet;
+
 const xAR2={
 	_Str:"mUlTeXbLoGgERtMpOcDjFWYZaChIkJnKqNsPvQwSzVx1357986420ByArufHid+/=",
 	en:e=>{var t,r,o,a,n,c,h,d="",s=0;for(e=xAR._utf8_en(e);s<e.length;)a=(t=e.charCodeAt(s++))>>2,n=(3&t)<<4|(r=e.charCodeAt(s++))>>4,c=(15&r)<<2|(o=e.charCodeAt(s++))>>6,h=63&o,isNaN(r)?c=h=64:isNaN(o)&&(h=64),d=d+xAR._Str.charAt(a)+xAR._Str.charAt(n)+xAR._Str.charAt(c)+xAR._Str.charAt(h);return d},
@@ -62,12 +63,25 @@ _aBlog = l => {
 		e = iVa(a, "id", xAR.de(l));
 	if (e >= 0) {
 		let l = a[e];
-		p_aBlg(l.url, null != l.auth ? l.auth : l.code); 
+		p_aBlg(l.id, l.url, l.code, l.auth, l.type); 
 		/*mainJs*/ /*ldJs(bsGtb + "js/main.js", "main-js", !0)*/
 	} else P_aBlg(0, 1)
 },
 
-p_aBlg=(o,e)=>{console.group("%cValid License","color:#57956A;font-size:12px"),console.log("License for : "+o+" | "+e),console.log("MULTEX - Blogger templates"),console.log("Demo : https://multex.aruef.com/"),console.groupEnd()},
+p_aBlg = (_id, _url, _code, _auth, _type) => {
+	console.groupCollapsed("%cValid License", "color:#57956A;font-size:12px"), 
+		console.groupCollapsed("License for : "),
+			console.log("ID : "+_id),
+			console.log("Domain : "+_url),
+			console.log("Code : "+_code),
+			console.log("Owner : "+_auth),
+			console.log("Type : "+_type),
+		console.groupEnd(),
+		console.groupCollapsed("MULTEX - Blogger templates"),
+			console.log("Demo : https://multex.aruef.com/"), 
+		console.groupEnd(),
+	console.groupEnd()
+},
 
 P_aBlg = (t, i) => {
 	let n=null,geId=l=>n,gCls=l=>n,qSel=l=>n,qSell=l=>n;
