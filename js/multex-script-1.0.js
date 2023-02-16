@@ -24,52 +24,88 @@ Defer.dom(".lazy", 100, "loaded", null, {rootMargin: "1px"});
 let admCk=geId("admCk"),
 txO1 = "location",
 txO2 = "href",
-txO3 = "https://www.aruf.my.id/?ref=";
+lcBD = "6372953478572614305",
+txO3 = "https://www.aruf.my.id/?ref=",
+lcPT = "template",
+lcPN = "multex",
+lcDn = isPv ? "" : "+"+window[txO1].hostname;
 
-const lcKey=null!=admCk?admCk.getAttribute("data-license"):"";
-const cIdb=t=>blogId==t&&admCk.getAttribute("data-id")==t,
-  dLss=lcKey;
+const xIdb=t=>blogId==t,
 
-if ("a" == dLss.charAt(0) && "" != xAR.d(dLss) && cIdb(xAR.xd(xAR.d(dLss).substring(1)).split("-")[0]) || "x" == dLss.charAt(0) && cIdb(xAR.xd(dLss.substring(1)).split("-")[0])) var _csDom = !0,
-	_xAi = !0,
-	_xAu = !0,
-	_xAe = !0,
-	_xAo = !0;
-else _csDom = 0, _xAi = 0, _xAu = 0, _xAe = 0, _xAo = 0, _ARtb = "";
-
-const csDom = _csDom,
-	xAi = _xAi,
-	xAu = _xAu,
-	xAe = _xAe,
-	xAo = _xAo;
-
-/*Main Function*/
-if (csDom!=1 && xAo!=1) {
-  let n=null,geId=l=>n,gCls=l=>n,qSel=l=>n,qSell=l=>n;
-  "undefined"!=typeof isPv?0==isPv&&(window[txO1][txO2]=txO3+window[txO1][txO2]):window[txO1][txO2]=txO3+window[txO1][txO2];
-}
-/*END*/
-
-
-const xIdb=t=>blogId==t&&document.getElementById("admCk").getAttribute("data-id")==t,
 c_blgId=d=>{let e=xAR.en(d.feed.id.$t.split("-")[1]);xAR.sLS("_AR_blgId",e)},
-c_aBlog=e=>{let s=xAR.en(e.entry.content.$t);xAR.sLS("_AR_aBlog",s);let t=e.entry.link.filter((e=>"enclosure"==e.rel)),r={};t.forEach((e=>{let s=e.href.replace("http://","").replace(".us",""),t=e.type;r[s]=t})),xAR.sLS("_AR_Usr",xAR.en(JSON.stringify(r))),xAR.sC("_AR_sess",1,{"max-age":parseInt(r.session)})},
+
+c_aBlog = e => {
+	let s = xAR.en(e.entry.content.$t);
+	xAR.sLS("_AR_aBlog", s);
+	let t = e.entry.link.filter((e => "enclosure" == e.rel)),
+		r = {};
+	t.forEach((e => {
+		let s = e.href.replace("http://", "").replace(".id", ""),
+			t = e.type;
+		r[s] = t
+	})), xAR.sLS("_AR_Usr", xAR.en(JSON.stringify(r))), xAR.sC("_AR_sess", 1, {
+		"max-age": parseInt(r.session)
+	})
+},
+
 _aBlog = l => {
 	let a = JSON.parse(xAR.de(xAR.gLS("_AR_aBlog"))).blog,
 		e = iVa(a, "id", xAR.de(l));
 	if (e >= 0) {
 		let l = a[e];
 		p_aBlg(l.url, null != l.auth ? l.auth : l.code); 
-		/*mainJs*/ /*xAo && ldJs(bsGtb + "js/main.js", "main-js", !0)*/
+		/*mainJs*/ /*ldJs(bsGtb + "js/main.js", "main-js", !0)*/
 	} else P_aBlg(0, 1)
 },
+
 p_aBlg=(o,e)=>{console.group("%cValid License","color:#57956A;font-size:12px"),console.log("License for : "+o+" | "+e),console.log("MULTEX - Blogger templates"),console.log("Demo : https://multex.aruef.com/"),console.groupEnd()},
-P_aBlg=(t,i)=>{alert("invalid license"),window[txO1][txO2]=txO3+window[txO1][txO2]},
-cxLss=s=>{if(geId("admCk").setAttribute("xid",s),xIdb(xAR.de(s))||P_aBlg(0,1),null!=xAR.gLS("_AR_aBlog"))_aBlog(s);else{let t=""!=xAR.xd(xAR.d(dLss).substring(1))?xAR.xd(xAR.d(dLss).substring(1)):xAR.xd(dLss.substring(1)),d=(t.split("-")[0],t.split("-")[1]),l=t.split("-")[2];ldJsx({src:"https://www.blogger.com/feeds/"+d+"/posts/default/"+l+"?alt=json-in-script&callback=c_aBlog",rem:!0,load:()=>{_aBlog(s)},err:()=>window[txO1][txO2]=txO3+window[txO1][txO2]})}};
+
+P_aBlg = (t, i) => {
+	let n=null,geId=l=>n,gCls=l=>n,qSel=l=>n,qSell=l=>n;
+	alert("invalid license");
+	"undefined"!=typeof isPv?0==isPv&&(window[txO1][txO2]=txO3+window[txO1][txO2]):window[txO1][txO2]=txO3+window[txO1][txO2];
+},
+
+cxLss = s => {
+	if(xIdb(xAR.de(s))){
+		if ( null != xAR.gLS("_AR_aBlog") ) {
+		 	_aBlog(s);	
+		} else {
+			let lcIB = xAR.de(s);
+			ldJsx({
+				src: "https://www.blogger.com/feeds/" + lcBD + "/posts/default?alt=json-in-script&max-results=1&q=label:" + lcPT + "+label:" + lcPN + "+" + lcIB + lcDn + "&callback=c_aBlog",
+				rem: !0,
+				load: () => {
+					_aBlog(s)
+				},
+				err: () => P_aBlg(0,1)
+			})
+		}	
+	}else{
+		P_aBlg(0,1)
+	}
+};
 
 /*check id blog*/
 null==xAR.gC("_AR_sess")&&(xAR.rLS("_AR_blgId"),xAR.rLS("_AR_aBlog"),xAR.rLS("_AR_Usr"));
-if(null!=xAR.gLS("_AR_blgId")){let s=xAR.gLS("_AR_blgId");cxLss(s)}else setTimeout((()=>{ldJsx({src:"/feeds/posts/summary/?alt=json-in-script&max-results=0&callback=c_blgId",rem:!0,load:()=>{let s=xAR.gLS("_AR_blgId");cxLss(s)},err:()=>{let s=xAR.en(blogId);xAR.sLS("_AR_blgId",s),cxLss(s)}})}),0);
+if (null != xAR.gLS("_AR_blgId")) {
+	let s = xAR.gLS("_AR_blgId");
+	cxLss(s)
+} else setTimeout((() => {
+	ldJsx({
+		src: "/feeds/posts/summary/?alt=json-in-script&max-results=0&callback=c_blgId",
+		rem: !0,
+		load: () => {
+			let s = xAR.gLS("_AR_blgId");
+			cxLss(s)
+		},
+		err: () => {
+			let s = xAR.en(blogId);
+			xAR.sLS("_AR_blgId", s), cxLss(s)
+		}
+	})
+}), 0);
+
 
 /*LzJs*/ 
 null==xAR.gLS("Lz_Js")&&xAR.sLS("Lz_Js",(new Date).getTime()),loadLzJs();
