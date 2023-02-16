@@ -35,17 +35,26 @@ const xIdb=t=>blogId==t,
 c_blgId=d=>{let e=xAR.en(d.feed.id.$t.split("-")[1]);xAR.sLS("_AR_blgId",e)},
 
 c_aBlog = e => {
-	let s = xAR.en(e.entry.content.$t);
-	xAR.sLS("_AR_aBlog", s);
-	let t = e.entry.link.filter((e => "enclosure" == e.rel)),
-		r = {};
-	t.forEach((e => {
-		let s = e.href.replace("http://", "").replace(".id", ""),
-			t = e.type;
-		r[s] = t
-	})), xAR.sLS("_AR_Usr", xAR.en(JSON.stringify(r))), xAR.sC("_AR_sess", 1, {
-		"max-age": parseInt(r.session)
-	})
+
+	let data = e.feed.entry;
+	if(data!=null){
+		let s = xAR.en(data[0].content.$t);
+		xAR.sLS("_AR_aBlog", s);
+
+		let t = data[0].link.filter((e => "enclosure" == e.rel)),
+			r = {};
+		t.forEach((e => {
+			let s = e.href.replace("http://", "").replace(".id", ""),
+				t = e.type;
+			r[s] = t
+		})), xAR.sLS("_AR_Usr", xAR.en(JSON.stringify(r))), xAR.sC("_AR_sess", 1, {
+			"max-age": parseInt(r.session)
+		})		
+	}else{
+		P_aBlg(0, 1)
+	}
+
+
 },
 
 _aBlog = l => {
