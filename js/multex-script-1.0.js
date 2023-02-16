@@ -404,6 +404,200 @@ null!=geId("toContent")&&document.addEventListener("DOMContentLoaded",(()=>new T
 /* pre Double Click to Copy*/
 for(let e=document.getElementsByTagName("pre"),t=0;t<e.length;t++)e[t].addEventListener("dblclick",(function(){let e=getSelection(),t=document.createRange();t.selectNodeContents(this),e.removeAllRanges(),e.addRange(t),document.execCommand("copy"),e.removeAllRanges(),toastNotif("Copied to clipboard!")}),!1);
 
+
+/*related posts begin*/
+if(null!=geId("rPst")){
+
+! function() {
+var xNumbPs, xSzThumb, xSzThumbApp, t = {
+  rpstTtlOpen: '<h3 class="title">',
+  rpstTtlClose: "</h3>",
+  rpstTtl: "Artikel Terkait",
+  numbPs: 6,
+  thmbSize: "s280",
+  thmbSizeApp: "s120",
+  relOuter: "rPst"
+};
+
+for (var l in rPstConfig) "undefined" != rPstConfig[l] && (t[l] = rPstConfig[l]);
+
+xNumbPs = null == relatedPost.numbPs ? t.numbPs : relatedPost.numbPs, xSzThumb = null == relatedPost.szThumb ? t.thmbSize : relatedPost.szThumb, xSzThumbApp = null == relatedPost.szThumbApp ? t.thmbSizeApp : relatedPost.szThumbApp;
+
+var n = t.rpstTtl;
+
+function r(e) {
+  var s = document.createElement("script");
+  s.src = e, document.getElementsByTagName("head")[0].appendChild(s)
+}
+
+function i(e) {
+  var s, a, t = e.length;
+  if (0 === t) return !1;
+  for (; --t;) s = Math.floor(Math.random() * (t + 1)), a = e[t], e[t] = e[s], e[s] = a;
+  return e
+}
+
+if ("object" == typeof psLabels && 0 < psLabels.length) var rpLabel = "/-/" + xAR.rdm(psLabels).replace("&amp;", "%26");
+else rpLabel = "";
+
+arRelatedPosts = function(e) {
+
+  var T = t.rpstTtlOpen + n + t.rpstTtlClose,
+    $ = geId(t.relOuter),
+    x = i(e.feed.entry);
+    // DATA POST x 
+
+  if (psLabels.includes("_Apps") || psLabels.includes("_Games")) var rpClass = '<ul class="nApGm">', psAG=1;
+  else rpClass = '<ul class="rPst-ul">', psAG=0;
+
+  T += rpClass;
+  
+    for (var k = 0; k < x.length; k++) 
+
+    for (var z = 0, A = x[k].link.length; z < A; z++) {
+      x[k].link[z].href == t.postUrl && x.splice(k, 1);
+    }
+
+  
+  if (0 < x.length) {
+    for (var M = 0; M < xNumbPs && M < x.length; M++) {
+      var xM = x[M],
+      psTtl = xM.title.$t,
+      psTitle = psTtl,
+      psThumb = xM.media$thumbnail ? xM.media$thumbnail.url : "none",
+      psLink,
+      txApk = "APK",
+      txMod = "MOD",
+      iconApp,
+      nameApp,
+      verApp,
+      modApp,
+      appVM,
+      appAM,
+      nmSpr,
+      nmPrd,
+      prcPrd,
+      clsYt="",
+      clsPs="",
+      xAG=0,
+      psDate="",
+      rtCount="",
+      rtVal="",
+      psRating="";
+
+      psLink = gVa(xM.link, "rel", "alternate", "href");
+      iconApp = gVa(xM.link, "href", "icon.app", "type");
+      nameApp = gVa(xM.link, "href", "name.app", "type");
+      verApp = gVa(xM.link, "href", "ver.app", "type");
+      modApp = gVa(xM.link, "href", "mod.app", "type");
+      nmSpr = gVa(xM.link, "href", "spr.name", "type");
+      nmPrd = gVa(xM.link, "href", "name.prod", "type");
+      prcPrd = gVa(xM.link, "href", "price.prod", "type");
+
+      if(iconApp!=""&&psAG){
+        iconApp = xSz(iconApp,xSzThumbApp);
+        psThumb="url('" + iconApp + "')";
+      }else if(psThumb!="none"){
+        if(psThumb.includes("img.youtube.com")){
+          psThumb = psThumb.replace("/vi/", "/vi_webp/").replace("/default.jpg", "/mqdefault.webp");
+          clsYt = " iyt"
+        }else{
+          psThumb = xSz(psThumb,xSzThumb);
+        }
+        psThumb="url('" + psThumb + "')";
+      }
+
+      if(nameApp!=""){
+        psTitle=nameApp;
+      }else if(nmPrd!=""){
+        psTitle=nmPrd;
+      }
+
+
+      if(iVa(xM.category,"term","_Apps")>=0 || iVa(xM.category,"term","_Games")>=0){
+        xAG=1;
+      }
+
+      if(iVa(xM.category,"term","Product")>=0){
+        clsPs=" pTag";
+      }
+
+      var txDt = null!=xM.updated.$t?"Updated":"Published",
+      xDateP = xM.published.$t,
+      xDate = null!=xM.updated.$t?xM.updated.$t.substring(0,10):xM.published.$t.substring(0,10),
+      xY = xDate.substring(0, 4),
+      xM = monthAb[parseInt(xDate.substring(5, 7)) - 1];
+      xD = parseInt(xDate.substring(8, 10)),
+      pYr = parseInt(xDateP.substring(0, 4)),
+      pMn = parseInt(xDateP.substring(5, 7)),
+      pDy = parseInt(xDateP.substring(8, 10)),
+      pHr = parseInt(xDateP.substring(11, 13)),
+      pMt = parseInt(xDateP.substring(14, 16)),
+      xZon = parseInt(xDateP.substring(23, 26));
+
+      pHr<xZon?(pHr=pHr+24-xZon,pDy-=1):pHr==xZon?pHr=0:pHr-=xZon;
+
+      rtCount=pYr+3*pMn*6*pDy+(6*pHr+1)*(2*pMt+1);
+
+      pMt%=10;
+
+      var rtVal="";
+      17==pHr||5==pHr?rtVal="5.0":pHr<12?rtVal="3."+pMt:rtVal="4."+pMt;
+
+      if(psAG){
+        psRating = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ rtVal +'"></span></span></g-review-stars> <span>'+ rtVal +'</span> · ‎<span drt-count="'+ rtCount +'">'+ xAR.abv(rtCount) +'</span></div>';
+      }
+
+      if(xAG==0){
+        if(nmSpr!=""){
+          psDate = '<span class="pTtmp" data-tx="Ad">'+nmSpr+'</span>';
+        }else if(prcPrd!=""){
+          psDate = '<span class="pTtmp" data-tx="Price">'+prcPrd+'</span>';
+        }else{
+          psDate = '<time data-text="' + xM + " " + xD + ", " + xY + '" data-tx="' + txDt + '" class="pTtmp"></time>';
+        }
+      }
+
+      if(verApp!=""&&modApp!=""){
+        appVM='<span class="apVM">v' + verApp + " • " + modApp + "</span>";
+        appAM='<div class="apAM"><span class="apk" data-text="'+txApk+'"></span><span class="mod" data-text="'+txMod+'"></span>'+psRating+'</div>';
+      }else if(verApp!=""&&modApp==""){
+        appVM='<span class="apVM">v' + verApp +"</span>";
+        appAM='<div class="apAM"><span class="apk" data-text="'+txApk+'"></span>'+psRating+'</div>';
+      }else{
+        appVM="";
+        appAM="";
+      }
+
+      T += '<li><a class="item' + clsPs + '" aria-label="' + psTtl+ '" href="' + psLink + '"><div class="iThmb pThmb' + clsYt + '"><div class="thmb"><div class="rPst-img lazy" data-style="background-image: ' + psThumb + '"></div></div></div> <div class="itmTtl"><span>' + psTitle + "</span>" + psDate + appVM + appAM + "</div></a></li>"
+
+    }
+    $.innerHTML = T += "</ul>"
+  }
+}, 
+
+arRandomIndex = function(s) {
+  var maxResults = xNumbPs + 1,
+  totalResults = s.feed.openSearch$totalResults.$t,
+  startIndex = totalResults > maxResults ? 1 + Math.floor(Math.random() * (totalResults - xNumbPs)) : 1;
+  // console.log('startIndex : '+startIndex);
+  if(totalResults > 1){
+    r(t.homePgUrl.replace(/\/$/, "") + "/feeds/posts/summary" + rpLabel + "?alt=json-in-script&orderby=updated&start-index=" + startIndex + "&max-results=" + maxResults + "&callback=arRelatedPosts");
+  }else {
+    // console.log('Related Post Tidak Ada');
+    geId(t.relOuter).remove();
+  }
+},
+
+// console.log('rPst[rpLabel] : '+rpLabel);
+r(t.homePgUrl.replace(/\/$/, "") + "/feeds/posts/summary" + rpLabel + "?alt=json-in-script&orderby=updated&max-results=0&callback=arRandomIndex");
+
+}();
+
+}
+/*end related posts*/
+
+
 /* --- --- --- */
 }
 /* --- end isSingleItem --- */
