@@ -187,150 +187,215 @@ _admBlg();
 
 
 
+/* --- isSingleItem begin --- */
+if(isIt){
+/* --- --- --- */
+/*iframe & content Comment*/
+let ifrCmn = geId("comment-editor");
+if(ifrCmn!=null){
+  let ifSrc = ifrCmn.getAttribute("data-src"),
+    rpTo = gCls("rpTo"),
+    cmnFm = geId("commentForm"),
+    addCm = geId("addCm"),
+    xFcm = gCls("cmFrm")[0],
+    c = (e,t,m,n)=> {
+      e.addEventListener("click", (()=> {
+        let d = e.getAttribute("data-reply-to");
+        geId("c" + d).appendChild(t), cmnFm.className = "cmRbox", addCm.className = "cmAd", m.src = n + "&parentID=" + d
+      }))
+    };
 
+  for (i = 0; i < rpTo.length; i++) c(rpTo[i], cmnFm, ifrCmn, ifSrc);
+  addCm.addEventListener("click", (()=> {
+    xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
+  }))
+}
+
+/* parse Comment */ 
+var cmnParse = e => {
+    let r = geId("cod-K"),
+      a = r.value.replace(/\t/g, "    "),
+      t = e.getAttribute("data-text");
+    if ("" != r.value) {
+      "pre" == t || "code" == t ? (a = a.replace(/&/g, "&amp;").replace(/'/g, "&#039;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), a = "pre" == t ? a.replace(/^/, '<i rel="pre">') : a.replace(/^/, '<i rel="code">')) : "image" == t ? a = a.replace(/^/, '<i rel="image">') : "quote" == t ? a = a.replace(/^/, '<i rel="quote">') : "tag" == t && (a = a.replace(/^/, '<i rel="tag">')), a = a.replace(/$/, "</i>"), r.value = a, r.focus(), remCt(geId("bcpKomen"), "hidden"), a = qSell(".parCmn .btn.m");
+      for (let l = 0; l < a.length; l++) a[l].disabled = !0
+    } else r.focus()
+  },
+  clrPcmn = () => {
+    let e = geId("cod-K");
+    e.value = "", e.focus(), addCt(geId("npC"), "hidden"), addCt(geId("bcpKomen"), "hidden");
+    for (let r = qSell(".parCmn .btn.m"), a = 0; a < r.length; a++) r[a].disabled = !1
+  },
+  cpyPcmn = () => {
+    geId("cod-K").select(), document.execCommand("copy"), geId("cod-K").value = "", remCt(geId("npC"), "hidden"), setTimeout((function() {
+      clrPcmn()
+    }), 1e3)
+  },
+  repText = e => {
+    let r = geId(e);
+    if (r) {
+      let a = r.innerHTML;
+      a = (a = a.replace(/<i rel="image">(.*?)<\/i>/gi, '<img class="lazy" data-src="$1" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image Comment" \/>')).replace(/<i rel="pre">(.*?)<\/i>/gi, '<div class="pre"><pre>$1</pre></div>'), r.innerHTML = a
+    }
+  };
+repText("cmHolder");
+
+/* Comments url in new tab */ 
+qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"extL")}));
+/* --- --- --- */
+}
+/* --- end isSingleItem --- */
+
+
+
+/* --- isHomepage begin --- */
+if(isHm){
+/* --- --- --- */
 /*psByLabel begin*/
 function _psByLbl(){
 
-let numbPs = null != ARtb.psByLabel.numbPs ? ARtb.psByLabel.numbPs : 6, 
-    szThumb = null != ARtb.psByLabel.szThumb ? ARtb.psByLabel.szThumb : 120,
-    sortDt = null != ARtb.psByLabel.sortDt ? ARtb.psByLabel.sortDt : "updated",
-    lblPst = qSell(".lblPst:not(.no-items)");
+	let numbPs = null != ARtb.psByLabel.numbPs ? ARtb.psByLabel.numbPs : 6, 
+	    szThumb = null != ARtb.psByLabel.szThumb ? ARtb.psByLabel.szThumb : 120,
+	    sortDt = null != ARtb.psByLabel.sortDt ? ARtb.psByLabel.sortDt : "updated",
+	    lblPst = qSell(".lblPst:not(.no-items)");
 
-for (var i = 0; i < lblPst.length; i++) {
-  remCt(lblPst[i],"hidden");
-  let label = lblPst[i].querySelector(".label-item").innerText;
-  let lbl = label.length > 0 ? encodeURI("/-/" + label) : "";
-  let elC = lblPst[i].querySelector(".lblPst-item");
+	for (var i = 0; i < lblPst.length; i++) {
+	  remCt(lblPst[i],"hidden");
+	  let label = lblPst[i].querySelector(".label-item").innerText;
+	  let lbl = label.length > 0 ? encodeURI("/-/" + label) : "";
+	  let elC = lblPst[i].querySelector(".lblPst-item");
 
-//begin
-xAR.gAj({
-  url: "/feeds/posts/summary"+lbl+"?alt=json&orderby="+sortDt+"&max-results="+numbPs,
-  async: !0,
-  success: function(e) {
-    let n = JSON.parse(e).feed.entry;
-    if(n!=null){
-    let elPs= '<div class="psLbl">';
-      n.forEach(function(dt, idx) {
+	//begin
+	xAR.gAj({
+	  url: "/feeds/posts/summary"+lbl+"?alt=json&orderby="+sortDt+"&max-results="+numbPs,
+	  async: !0,
+	  success: function(e) {
+	    let n = JSON.parse(e).feed.entry;
+	    if(n!=null){
+	    let elPs= '<div class="psLbl">';
+	      n.forEach(function(dt, idx) {
 
-        const psTtl = dt.title.$t;
-            psLink = gVa(dt.link, "rel", "alternate", "href"),
-            psThumb = dt.media$thumbnail ? dt.media$thumbnail.url : "none",
-            
-            dtPub={date:new Date(dt.published.$t),year:()=>dtPub.date.getUTCFullYear(),month:()=>parseInt(dtPub.date.getUTCMonth())+1,day:()=>dtPub.date.getUTCDate(),hour:()=>dtPub.date.getUTCHours(),min:()=>dtPub.date.getUTCMinutes()},
+	        const psTtl = dt.title.$t,
+	            psLink = gVa(dt.link, "rel", "alternate", "href"),
+	            psThumb = dt.media$thumbnail ? dt.media$thumbnail.url : "none",
+	            
+	            dtPub={date:new Date(dt.published.$t),year:()=>dtPub.date.getUTCFullYear(),month:()=>parseInt(dtPub.date.getUTCMonth())+1,day:()=>dtPub.date.getUTCDate(),hour:()=>dtPub.date.getUTCHours(),min:()=>dtPub.date.getUTCMinutes()},
 
-            psRate=t=>{let u=dtPub.hour(),d=dtPub.day(),e="";if("v"==t){let t=dtPub.min()%10;e=17==u||5==u?"5.0":u<12?"3."+t:"4."+t}else e=dtPub.year()+3*dtPub.month()*6*d+(6*u+1)*(2*dtPub.min()+1);return e},
+	            psRate=t=>{let u=dtPub.hour(),d=dtPub.day(),e="";if("v"==t){let t=dtPub.min()%10;e=17==u||5==u?"5.0":u<12?"3."+t:"4."+t}else e=dtPub.year()+3*dtPub.month()*6*d+(6*u+1)*(2*dtPub.min()+1);return e},
 
-            dtUpd={date:new Date(dt.updated.$t),year:()=>dtUpd.date.getUTCFullYear(),month:()=>monthAb[dtUpd.date.getUTCMonth()],day:()=>dtUpd.date.getUTCDate()},
+	            dtUpd={date:new Date(dt.updated.$t),year:()=>dtUpd.date.getUTCFullYear(),month:()=>monthAb[dtUpd.date.getUTCMonth()],day:()=>dtUpd.date.getUTCDate()},
 
-            xSpr = iVa(dt.category,"term","Sponsored")>=0?!0:!1,
-            psSpr = {
-              name : gVa(dt.link,"href","spr.name","type")
-            },
+	            xSpr = iVa(dt.category,"term","Sponsored")>=0?!0:!1,
+	            psSpr = {
+	              name : gVa(dt.link,"href","spr.name","type")
+	            },
 
-            xApp = iVa(dt.category,"term","_Apps")>=0||iVa(dt.category,"term","_Games")>=0?!0:!1,
-            psApp={name:gVa(dt.link,"href","name.app","type"),icon:gVa(dt.link,"href","icon.app","type"),ver:gVa(dt.link,"href","ver.app","type"),mod:gVa(dt.link,"href","mod.app","type"),txApk:""!=gVa(dt.link,"href","apk-tx.app","type")?gVa(dt.link,"href","apk-tx.app","type"):"APK",txMod:""!=gVa(dt.link,"href","mod-tx.app","type")?gVa(dt.link,"href","mod-tx.app","type"):"MOD"},
+	            xApp = iVa(dt.category,"term","_Apps")>=0||iVa(dt.category,"term","_Games")>=0?!0:!1,
+	            psApp={name:gVa(dt.link,"href","name.app","type"),icon:gVa(dt.link,"href","icon.app","type"),ver:gVa(dt.link,"href","ver.app","type"),mod:gVa(dt.link,"href","mod.app","type"),txApk:""!=gVa(dt.link,"href","apk-tx.app","type")?gVa(dt.link,"href","apk-tx.app","type"):"APK",txMod:""!=gVa(dt.link,"href","mod-tx.app","type")?gVa(dt.link,"href","mod-tx.app","type"):"MOD"},
 
-            xProd = iVa(dt.category,"term","Product")>=0?!0:!1,
-            psProd= {
-              name : gVa(dt.link,"href","name.prod","type"),
-              price : gVa(dt.link,"href","price.prod","type")
-            },
+	            xProd = iVa(dt.category,"term","Product")>=0?!0:!1,
+	            psProd= {
+	              name : gVa(dt.link,"href","name.prod","type"),
+	              price : gVa(dt.link,"href","price.prod","type")
+	            },
 
-            xAnime = iVa(dt.category,"term","Anime")>=0?!0:!1,
-            psAnime= {
-              name : gVa(dt.link,"href","name.ani.me","type"),
-              epi : gVa(dt.link,"href","episodes.ani.me","type")
-            },
+	            xAnime = iVa(dt.category,"term","Anime")>=0?!0:!1,
+	            psAnime= {
+	              name : gVa(dt.link,"href","name.ani.me","type"),
+	              epi : gVa(dt.link,"href","episodes.ani.me","type")
+	            },
 
-            z = "";
-
-
-        
-        let pTtl = psTtl,
-            pThumb = "",
-            pRate = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ psRate("v") +'"></span></span></g-review-stars> <span>'+ psRate("v") +'</span> · ‎<span drt-count="'+ psRate() +'">'+ xAR.abv(psRate()) +'</span></div>',
-            pUpd = dtUpd.month()+" "+dtUpd.day()+", "+dtUpd.year(),
-            pDate = "",
-            clsYt = "",
-            appVM = "",
-            appAM = "",
-            clsPs = "";
-
-        // title
-        if(psApp.name!=""){
-          pTtl=psApp.name;
-        }else if(psProd.name!=""){
-          pTtl=psProd.name;
-        }
-
-        // image
-        if(xApp&&psApp.icon!=""){
-          pThumb="url('" + xSz(psApp.icon,szThumb) + "')";
-        }else if(psThumb!="none"){
-          if(psThumb.includes("img.youtube.com")){
-            pThumb = psThumb.replace("/vi/", "/vi_webp/").replace("/default.jpg", "/mqdefault.webp");
-            clsYt = " iyt"
-          }else{
-            pThumb = xSz(psThumb,szThumb);
-          }
-          pThumb="url('" + pThumb + "')";
-        }
-
-        // date
-        if(!xApp){
-          if(xSpr){
-            pDate = '<span class="pTtmp" data-tx="Ad">'+psSpr.name+'</span>';
-          }else if(xProd){
-            pDate = '<span class="pTtmp" data-tx="Price">'+psProd.price+'</span>';
-          }else{
-            pDate = '<time data-text="' + pUpd + '" data-tx="Updated" class="pTtmp"></time>';
-          }
-        }
-
-        // app
-        if(xApp){
-          if(psApp.ver!=""&&psApp.mod!=""){
-            appVM='<span class="apVM">v' + psApp.ver + " • " + psApp.mod + "</span>";
-            appAM='<div class="apAM"><span class="apk" data-text="'+psApp.txApk+'"></span><span class="mod" data-text="'+psApp.txMod+'"></span>'+pRate+'</div>';
-          }else if(psApp.ver!=""&&psApp.mod==""){
-            appVM='<span class="apVM">v' + psApp.ver +"</span>";
-            appAM='<div class="apAM"><span class="apk" data-text="'+psApp.txApk+'"></span>'+pRate+'</div>';
-          }
-          clsPs = " nApGm";
-        }
+	            z = "";
 
 
-        // console.log('pTtl : '+pTtl);
-        // console.log('pThumb : '+pThumb);
-        // console.log('pRate : '+pRate);
-        // console.log('pUpd : '+pUpd);
+	        
+	        let pTtl = psTtl,
+	            pThumb = "",
+	            pRate = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ psRate("v") +'"></span></span></g-review-stars> <span>'+ psRate("v") +'</span> · ‎<span drt-count="'+ psRate() +'">'+ xAR.abv(psRate()) +'</span></div>',
+	            pUpd = dtUpd.month()+" "+dtUpd.day()+", "+dtUpd.year(),
+	            pDate = "",
+	            clsYt = "",
+	            appVM = "",
+	            appAM = "",
+	            clsPs = "";
 
-        elPs += '<article><a class="item' + clsPs + '" aria-label="' + psTtl + '" href="' + psLink + '"><div class="iThmb pThmb' + clsYt + '"><div class="thmb"><div class="img" style="background-image: ' + pThumb + '"></div></div></div> <div class="itmTtl"><span>' + pTtl + "</span>" + pDate + appVM + appAM + "</div></a></article>";
+	        // title
+	        if(psApp.name!=""){
+	          pTtl=psApp.name;
+	        }else if(psProd.name!=""){
+	          pTtl=psProd.name;
+	        }
 
-      });
+	        // image
+	        if(xApp&&psApp.icon!=""){
+	          pThumb="url('" + xSz(psApp.icon,szThumb) + "')";
+	        }else if(psThumb!="none"){
+	          if(psThumb.includes("img.youtube.com")){
+	            pThumb = psThumb.replace("/vi/", "/vi_webp/").replace("/default.jpg", "/mqdefault.webp");
+	            clsYt = " iyt"
+	          }else{
+	            pThumb = xSz(psThumb,szThumb);
+	          }
+	          pThumb="url('" + pThumb + "')";
+	        }
 
-    elPs += "</div>";
-    elC.innerHTML = elPs;
+	        // date
+	        if(!xApp){
+	          if(xSpr){
+	            pDate = '<span class="pTtmp" data-tx="Ad">'+psSpr.name+'</span>';
+	          }else if(xProd){
+	            pDate = '<span class="pTtmp" data-tx="Price">'+psProd.price+'</span>';
+	          }else{
+	            pDate = '<time data-text="' + pUpd + '" data-tx="Updated" class="pTtmp"></time>';
+	          }
+	        }
 
-    }else{
-      elC.innerHTML = "<p class='note wr'>No posts yet.</p>";
-    }
-  }
-});
-//end
+	        // app
+	        if(xApp){
+	          if(psApp.ver!=""&&psApp.mod!=""){
+	            appVM='<span class="apVM">v' + psApp.ver + " • " + psApp.mod + "</span>";
+	            appAM='<div class="apAM"><span class="apk" data-text="'+psApp.txApk+'"></span><span class="mod" data-text="'+psApp.txMod+'"></span>'+pRate+'</div>';
+	          }else if(psApp.ver!=""&&psApp.mod==""){
+	            appVM='<span class="apVM">v' + psApp.ver +"</span>";
+	            appAM='<div class="apAM"><span class="apk" data-text="'+psApp.txApk+'"></span>'+pRate+'</div>';
+	          }
+	          clsPs = " nApGm";
+	        }
 
 
-}
+	        // console.log('pTtl : '+pTtl);
+	        // console.log('pThumb : '+pThumb);
+	        // console.log('pRate : '+pRate);
+	        // console.log('pUpd : '+pUpd);
+
+	        elPs += '<article><a class="item' + clsPs + '" aria-label="' + psTtl + '" href="' + psLink + '"><div class="iThmb pThmb' + clsYt + '"><div class="thmb"><div class="img" style="background-image: ' + pThumb + '"></div></div></div> <div class="itmTtl"><span>' + pTtl + "</span>" + pDate + appVM + appAM + "</div></a></article>";
+
+	      });
+
+	    elPs += "</div>";
+	    elC.innerHTML = elPs;
+
+	    }else{
+	      elC.innerHTML = "<p class='note wr'>No posts yet.</p>";
+	    }
+	  }
+	});
+	//end
 
 
+	}
 
 }
 
 /*run*/
-if(null != qSel(".lblPst") && isHm && ARtb.psByLabel.enable){
+if(null != qSel(".lblPst:not(.no-items") && ARtb.psByLabel.enable){
 	_psByLbl();
 }
 /*end psByLabel*/
+/* --- --- --- */
+}
+/* --- end isHomepage --- */
+
 
 
 if(ARtb.infiniteScroll){
@@ -350,6 +415,14 @@ if(ARtb.infiniteScroll){
   // qSell(".ntry.pAdin ins.adsbygoogle").length>0&&(adsbygoogle=window.adsbygoogle||[]).push({});
 }));
 }
+
+
+
+/*Widgets Feature begin*/
+/*Maintenance Mode*/
+if(null!=qSel(".mMT")){let e=qSel(".mMT .days"),t=qSel(".mMT .hours"),n=qSel(".mMT .minutes"),l=qSel(".mMT .seconds"),T=qSel(".mMT"),o=new Date(mtEndOn),m=!1;const r=()=>{let T=new Date(),r=o.getTime()-T.getTime();r<=1e3&&(m=!0);let M=36e5,a=Math.floor(r/864e5),i=Math.floor(r%864e5/M),s=Math.floor(r%M/6e4),h=Math.floor(r%6e4/1e3);e.innerText=a<10?"0"+a:a,t.innerText=i<10?"0"+i:i,n.innerText=s<10?"0"+s:s,l.innerText=h<10?"0"+h:h};setInterval((()=>{m?addCt(T,"h"):r()}),1e3)}
+/*end widgets feature*/
+
 
 
 /**conf translate**/function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:ARtb.gTranslate.pageLang,includedLanguages:ARtb.gTranslate.includedLangs,layout:google.translate.TranslateElement.InlineLayout.SIMPLE},"google_translate_element")}
