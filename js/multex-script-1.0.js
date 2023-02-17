@@ -346,19 +346,17 @@ if(isIt){
 /* Table of Content */
 class TableOfContents{constructor({from:e,to:t}){this.fromElement=e,this.toElement=t,this.headingElements=this.fromElement.querySelectorAll("h1:not(.n),h2:not(.n),h3:not(.n),h4:not(.n),h5:not(.n),h6:not(.n)"),this.tocElement=document.createElement("div")}getMostImportantHeadingLevel(){let e=6;for(let t=0;t<this.headingElements.length;t++){let n=TableOfContents.getHeadingLevel(this.headingElements[t]);e=n<e?n:e}return e}static generateId(e){return e.textContent.replace(/\s+/g,"_")}static getHeadingLevel(e){switch(e.tagName.toLowerCase()){case"h1":default:return 1;case"h2":return 2;case"h3":return 3;case"h4":return 4;case"h5":return 5;case"h6":return 6}}generateToc(){let e=this.getMostImportantHeadingLevel()-1,t=this.tocElement;if(0!==this.headingElements.length){for(let n=0;n<this.headingElements.length;n++){let l=this.headingElements[n],a=TableOfContents.getHeadingLevel(l),o=a-e,r=document.createElement("a");if(l.id||(l.id=TableOfContents.generateId(l)),r.href=`#${l.id}`,r.textContent=l.textContent,o>0){for(let e=0;e<o;e++){let e=document.createElement("ol"),n=document.createElement("li");e.appendChild(n),t.appendChild(e),t=n}t.appendChild(r)}else{for(let e=0;e<-o;e++)t=t.parentNode.parentNode;let e=document.createElement("li");e.appendChild(r),t.parentNode.appendChild(e),t=e}e=a}this.toElement.appendChild(this.tocElement.firstChild)}else rEl("#HTML11")}}
 
+
 /*iframe & content Comment*/
 setTimeout(()=> {
   let ifrCmn = geId("comment-editor");
   if(ifrCmn!=null){
-  	console.log('ada iframe..');
     let ifSrc = ifrCmn.getAttribute("data-src"),
   	rpTo = qSell(".rpTo"),
   	cmnFm = geId("commentForm"),
   	addCm = geId("addCm"),
   	xFcm = gCls("cmFrm")[0];
-  	console.log(rpTo!=null);
   	rpTo.forEach((el)=> {
-  		console.log('di klik...');
   		el.addEventListener("click", ()=> {
   			let d = el.getAttribute("data-reply-to");
   			geId("c" + d).appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd", ifrCmn.src = ifSrc + "&parentID=" + d	
@@ -368,47 +366,46 @@ setTimeout(()=> {
   	  xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
   	}))
   }
-}, 0);
 
-/* parse Comment */ 
-var cmnParse = e => {
-    let r = geId("cod-K"),
-      a = r.value.replace(/\t/g, "    "),
-      t = e.getAttribute("data-text");
-    if ("" != r.value) {
-      "pre" == t || "code" == t ? (a = a.replace(/&/g, "&amp;").replace(/'/g, "&#039;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), a = "pre" == t ? a.replace(/^/, '<i rel="pre">') : a.replace(/^/, '<i rel="code">')) : "image" == t ? a = a.replace(/^/, '<i rel="image">') : "quote" == t ? a = a.replace(/^/, '<i rel="quote">') : "tag" == t && (a = a.replace(/^/, '<i rel="tag">')), a = a.replace(/$/, "</i>"), r.value = a, r.focus(), remCt(geId("bcpKomen"), "hidden"), a = qSell(".parCmn .btn.m");
-      for (let l = 0; l < a.length; l++) a[l].disabled = !0
-    } else r.focus()
-  },
-  clrPcmn = () => {
-    let e = geId("cod-K");
-    e.value = "", e.focus(), addCt(geId("npC"), "hidden"), addCt(geId("bcpKomen"), "hidden");
-    for (let r = qSell(".parCmn .btn.m"), a = 0; a < r.length; a++) r[a].disabled = !1
-  },
-  cpyPcmn = () => {
-    geId("cod-K").select(), document.execCommand("copy"), geId("cod-K").value = "", remCt(geId("npC"), "hidden"), setTimeout((function() {
-      clrPcmn()
-    }), 1e3)
-  },
-  repText = e => {
-    let r = geId(e);
-    if (r) {
-      let a = r.innerHTML;
-      a = (a = a.replace(/<i rel="image">(.*?)<\/i>/gi, '<img class="lazy" data-src="$1" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image Comment" \/>')).replace(/<i rel="pre">(.*?)<\/i>/gi, '<div class="pre"><pre>$1</pre></div>'), r.innerHTML = a
-    }
-  };
-repText("cmHolder");
+  /* parse Comment */ 
+  var cmnParse = e => {
+      let r = geId("cod-K"),
+        a = r.value.replace(/\t/g, "    "),
+        t = e.getAttribute("data-text");
+      if ("" != r.value) {
+        "pre" == t || "code" == t ? (a = a.replace(/&/g, "&amp;").replace(/'/g, "&#039;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), a = "pre" == t ? a.replace(/^/, '<i rel="pre">') : a.replace(/^/, '<i rel="code">')) : "image" == t ? a = a.replace(/^/, '<i rel="image">') : "quote" == t ? a = a.replace(/^/, '<i rel="quote">') : "tag" == t && (a = a.replace(/^/, '<i rel="tag">')), a = a.replace(/$/, "</i>"), r.value = a, r.focus(), remCt(geId("bcpKomen"), "hidden"), a = qSell(".parCmn .btn.m");
+        for (let l = 0; l < a.length; l++) a[l].disabled = !0
+      } else r.focus()
+    },
+    clrPcmn = () => {
+      let e = geId("cod-K");
+      e.value = "", e.focus(), addCt(geId("npC"), "hidden"), addCt(geId("bcpKomen"), "hidden");
+      for (let r = qSell(".parCmn .btn.m"), a = 0; a < r.length; a++) r[a].disabled = !1
+    },
+    cpyPcmn = () => {
+      geId("cod-K").select(), document.execCommand("copy"), geId("cod-K").value = "", remCt(geId("npC"), "hidden"), setTimeout((function() {
+        clrPcmn()
+      }), 1e3)
+    },
+    repText = e => {
+      let r = geId(e);
+      if (r) {
+        let a = r.innerHTML;
+        a = (a = a.replace(/<i rel="image">(.*?)<\/i>/gi, '<img class="lazy" data-src="$1" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image Comment" \/>')).replace(/<i rel="pre">(.*?)<\/i>/gi, '<div class="pre"><pre>$1</pre></div>'), r.innerHTML = a
+      }
+    };
+  repText("cmHolder");
 
-/* Comments url in new tab */ 
-qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"extL")}));
+  /* Comments url in new tab */ 
+  qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"extL")}));
 
-/*TimeAgo Comment*/
-setTimeout(()=> {
+  /*TimeAgo Comment*/
   let dtTm = qSell(".dtTm");
   dtTm.forEach((el)=> {
-    el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
+  	el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
   });
 }, 1000);
+
 
 /*lazy yt click thumnail*/
 for(let e=qSell(".lazyYt"),t=0;t<e.length;t++){let a="https://img.youtube.com/vi_webp/"+e[t].dataset.embed+"/sddefault.webp",l=new Image();addCt(l,"lazy"),setAttr(l,"data-src",a),setAttr(l,"src","data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="),setAttr(l,"alt","Youtube video"),l.addEventListener("load",void e[t].appendChild(l)),e[t].addEventListener("click",(function(){let e=document.createElement("iframe");e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen",""),e.setAttribute("src","https://play.google.com/video/lava/web/player/yt:movie:"+this.dataset.embed+"?autoplay=1&amp;authuser=0&amp;embed=play"),this.innerHTML="",this.appendChild(e)}))}
