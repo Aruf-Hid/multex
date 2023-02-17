@@ -7,11 +7,10 @@ const timeAgo = function(e, xmp) {
     ["minutes","hours","days","weeks","months","years","seconds"],
     "right now","about ","about a "," ago","Today at "," AM"," PM"
   ],
+  tVal = Date.now() - e;
 
   console.log(aTime);
   console.log(aTime[1]);
-
-  tVal = Date.now() - e;
 
   if ((tVal) < 60000) {
     let xStm = parseInt(tVal/1000);
@@ -38,7 +37,7 @@ const timeAgo = function(e, xmp) {
   } else {
   	console.log(aTime);
   	console.log(aTime[1]);
-  	
+
     //about a **** ago
     for (let aa = 0; aa < xTime.length; aa++) {
       if ((xTime[(xTime.length - (aa + 1))] - 1) < tVal) {
