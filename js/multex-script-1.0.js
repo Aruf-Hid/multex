@@ -348,8 +348,8 @@ class TableOfContents{constructor({from:e,to:t}){this.fromElement=e,this.toEleme
 
 /*iframe & content Comment*/
 let ifrCmn = geId("comment-editor");
-console.log(ifrCmn);
 if(ifrCmn!=null){
+	console.log("ada iframe komentar...");
   let ifSrc = ifrCmn.getAttribute("data-src"),
     rpTo = gCls("rpTo"),
     cmnFm = geId("commentForm"),
@@ -357,6 +357,7 @@ if(ifrCmn!=null){
     xFcm = gCls("cmFrm")[0],
     c = (e,t,m,n)=> {
       e.addEventListener("click", (()=> {
+      	console.log("klik balas..");
         let d = e.getAttribute("data-reply-to");
         geId("c" + d).appendChild(t), cmnFm.className = "cmRbox", addCm.className = "cmAd", m.src = n + "&parentID=" + d
       }))
