@@ -36,6 +36,10 @@ const timeAgo = function(e, xmp) {
   
   } else {
   	console.log(aTime);
+  	console.log(aTime[0]);
+  	console.log(aTime[3]);
+  	console.log(aTime[2]);
+  	console.log(aTime["1"]);
   	console.log(aTime[1]);
 
     //about a **** ago
