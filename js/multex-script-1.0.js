@@ -39,6 +39,11 @@ const timeAgo = function(e, xmp) {
         let xVal = Math.floor(tVal / (xTime[(xTime.length - (aa + 1))] - 1));
         if (xVal > 1) {
           //about * *** ago
+          console.log("aTime[1]");
+          console.log(aTime[1]);
+          console.log(xTime.length - (aa + 1));
+          console.log("aTime[1][xTime.length - (aa + 1)]");
+          console.log(aTime[1][xTime.length - (aa + 1)]);
           return aTime[3] + xVal + ' ' + aTime[1][xTime.length - (aa + 1)] + aTime[5];
         } else {
           return aTime[4] + aTime[0][xTime.length - (aa + 1)] + aTime[5]
