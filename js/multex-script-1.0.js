@@ -7,6 +7,10 @@ const timeAgo = function(e, xmp) {
     ["minutes","hours","days","weeks","months","years","seconds"],
     "right now","about ","about a "," ago","Today at "," AM"," PM"
   ],
+
+  console.log(aTime);
+  console.log(aTime[1]);
+
   tVal = Date.now() - e;
 
   if ((tVal) < 60000) {
@@ -32,7 +36,9 @@ const timeAgo = function(e, xmp) {
     return aTime[6] + (((oldDate.getHours() - 12) * (oldDate.getHours() > 12)) + ((oldDate.getHours()) * (oldDate.getHours() < 13))) + ':' + ot(oldDate.getMinutes()) + apm();
   
   } else {
-
+  	console.log(aTime);
+  	console.log(aTime[1]);
+  	
     //about a **** ago
     for (let aa = 0; aa < xTime.length; aa++) {
       if ((xTime[(xTime.length - (aa + 1))] - 1) < tVal) {
