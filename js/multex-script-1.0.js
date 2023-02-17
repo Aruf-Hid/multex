@@ -347,23 +347,25 @@ if(isIt){
 class TableOfContents{constructor({from:e,to:t}){this.fromElement=e,this.toElement=t,this.headingElements=this.fromElement.querySelectorAll("h1:not(.n),h2:not(.n),h3:not(.n),h4:not(.n),h5:not(.n),h6:not(.n)"),this.tocElement=document.createElement("div")}getMostImportantHeadingLevel(){let e=6;for(let t=0;t<this.headingElements.length;t++){let n=TableOfContents.getHeadingLevel(this.headingElements[t]);e=n<e?n:e}return e}static generateId(e){return e.textContent.replace(/\s+/g,"_")}static getHeadingLevel(e){switch(e.tagName.toLowerCase()){case"h1":default:return 1;case"h2":return 2;case"h3":return 3;case"h4":return 4;case"h5":return 5;case"h6":return 6}}generateToc(){let e=this.getMostImportantHeadingLevel()-1,t=this.tocElement;if(0!==this.headingElements.length){for(let n=0;n<this.headingElements.length;n++){let l=this.headingElements[n],a=TableOfContents.getHeadingLevel(l),o=a-e,r=document.createElement("a");if(l.id||(l.id=TableOfContents.generateId(l)),r.href=`#${l.id}`,r.textContent=l.textContent,o>0){for(let e=0;e<o;e++){let e=document.createElement("ol"),n=document.createElement("li");e.appendChild(n),t.appendChild(e),t=n}t.appendChild(r)}else{for(let e=0;e<-o;e++)t=t.parentNode.parentNode;let e=document.createElement("li");e.appendChild(r),t.parentNode.appendChild(e),t=e}e=a}this.toElement.appendChild(this.tocElement.firstChild)}else rEl("#HTML11")}}
 
 /*iframe & content Comment*/
-let ifrCmn = geId("comment-editor");
-if(ifrCmn!=null){
-  let ifSrc = ifrCmn.getAttribute("data-src"),
-	rpTo = qSell(".rpTo"),
-	cmnFm = geId("commentForm"),
-	addCm = geId("addCm"),
-	xFcm = gCls("cmFrm")[0];
-	rpTo.forEach((el)=> {
-		el.addEventListener("click", ()=> {
-			let d = el.getAttribute("data-reply-to");
-			geId("c" + d).appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd", ifrCmn.src = ifSrc + "&parentID=" + d	
-		})
-	});
-	addCm.addEventListener("click", (()=> {
-	  xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
-	}))
-}
+setTimeout(()=> {
+  let ifrCmn = geId("comment-editor");
+  if(ifrCmn!=null){
+    let ifSrc = ifrCmn.getAttribute("data-src"),
+  	rpTo = qSell(".rpTo"),
+  	cmnFm = geId("commentForm"),
+  	addCm = geId("addCm"),
+  	xFcm = gCls("cmFrm")[0];
+  	rpTo.forEach((el)=> {
+  		el.addEventListener("click", ()=> {
+  			let d = el.getAttribute("data-reply-to");
+  			geId("c" + d).appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd", ifrCmn.src = ifSrc + "&parentID=" + d	
+  		})
+  	});
+  	addCm.addEventListener("click", (()=> {
+  	  xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
+  	}))
+  }
+}, 0);
 
 /* parse Comment */ 
 var cmnParse = e => {
