@@ -350,12 +350,15 @@ class TableOfContents{constructor({from:e,to:t}){this.fromElement=e,this.toEleme
 setTimeout(()=> {
   let ifrCmn = geId("comment-editor");
   if(ifrCmn!=null){
+  	console.log('ada iframe..');
     let ifSrc = ifrCmn.getAttribute("data-src"),
   	rpTo = qSell(".rpTo"),
   	cmnFm = geId("commentForm"),
   	addCm = geId("addCm"),
   	xFcm = gCls("cmFrm")[0];
+  	console.log(rpTo!=null);
   	rpTo.forEach((el)=> {
+  		console.log('di klik...');
   		el.addEventListener("click", ()=> {
   			let d = el.getAttribute("data-reply-to");
   			geId("c" + d).appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd", ifrCmn.src = ifSrc + "&parentID=" + d	
