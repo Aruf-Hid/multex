@@ -5,6 +5,9 @@ const timeAgo=(e,t)=>{let n=[6e4,36e5,864e5,6048e5,26298e5,315576e5],o="undefine
 /*!@shinsenter/defer.js@3.4.0*/
 !function(e){function n(n){e.addEventListener(n,B)}function t(n){e.removeEventListener(n,B)}function o(e,n,t){C?z(e,n):(t||o.lazy&&void 0===t?S:L).push(e,n)}function i(e){k.head.appendChild(e)}function c(e,n){q.call(e.attributes)[y](n)}function r(e,n,t,o){return o=(n?k.getElementById(n):o)||k.createElement(e),n&&(o.id=n),t&&(o.onload=t),o}function u(e,n,t){(t=e.src)&&((n=r(m)).rel="preload",n.as=h,n.href=t,(t=e[g](w))&&n[b](w,t),(t=e[g](x))&&n[b](x,t),i(n))}function a(e,n){return q.call((n||k).querySelectorAll(e))}function s(e,n){e.parentNode.replaceChild(n,e)}function f(e,n){a("source,img",e)[y](f),c(e,(function(n,t){(t=/^data-(.+)/.exec(n.name))&&e[b](t[1],n.value)})),"string"==typeof n&&n&&(e.className+=" "+n),p in e&&e[p]()}function l(e,n,t){o((function(n){(n=a(e||N))[y](u),function e(t,o){(t=n[E]())&&((o=r(t.nodeName)).text=t.text,c(t,(function(e){"type"!=e.name&&o[b](e.name,e.value)})),o.src&&!o[g]("async")?(o.onload=o.onerror=e,s(t,o)):(s(t,o),e()))}()}),n,t)}var d="Defer",m="link",h="script",p="load",v="pageshow",y="forEach",g="getAttribute",b="setAttribute",E="shift",w="crossorigin",x="integrity",A=["mousemove","keydown","touchstart","wheel"],I="on"+v in e?v:p,N=h+"[type=deferjs]",j=e.IntersectionObserver,k=e.document||e,z=e.setTimeout,C=/p/.test(k.readyState),L=[],S=[],q=L.slice,B=function(e,i){for(i=I==e.type?(t(I),C=o,A[y](n),L):(A[y](t),S);i[0];)z(i[E](),i[E]())};l(),o.all=l,o.dom=function(e,n,t,i,c){o((function(n){function r(e){i&&!1===i(e)||f(e,t)}n=!!j&&new j((function(e){e[y]((function(e,t){e.isIntersecting&&(n.unobserve(t=e.target),r(t))}))}),c),a(e||"[data-src]")[y]((function(e){e[d]!=o&&(e[d]=o,e[b]("lazied",""),n?n.observe(e):r(e))}))}),n,!1)},o.css=function(e,n,t,c,u){o((function(t){(t=r(m,n,c)).rel="stylesheet",t.href=e,i(t)}),t,u)},o.js=function(e,n,t,c,u){o((function(t){(t=r(h,n,c)).src=e,i(t)}),t,u)},o.reveal=f,e[d]=o,C||n(I)}(this);
 
+Defer.dom(".lazy", 100, "loaded", null, {rootMargin: "1px"});
+
+
 xAR.sLS("xAR_script", (new Date).getTime() + 864e5);
 const ARtb = tempSet;
 
@@ -355,6 +358,7 @@ setTimeout(()=> {
   	xFcm = gCls("cmFrm")[0];
   	rpTo.forEach((el)=> {
   		el.addEventListener("click", ()=> {
+  			console.log('balas komentar...')
   			let d = el.getAttribute("data-reply-to");
   			geId("c" + d).appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd", ifrCmn.src = ifSrc + "&parentID=" + d	
   		})
@@ -364,45 +368,48 @@ setTimeout(()=> {
   	}))
   }
 
-  /* parse Comment */ 
-  var cmnParse = e => {
-      let r = geId("cod-K"),
-        a = r.value.replace(/\t/g, "    "),
-        t = e.getAttribute("data-text");
-      if ("" != r.value) {
-        "pre" == t || "code" == t ? (a = a.replace(/&/g, "&amp;").replace(/'/g, "&#039;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), a = "pre" == t ? a.replace(/^/, '<i rel="pre">') : a.replace(/^/, '<i rel="code">')) : "image" == t ? a = a.replace(/^/, '<i rel="image">') : "quote" == t ? a = a.replace(/^/, '<i rel="quote">') : "tag" == t && (a = a.replace(/^/, '<i rel="tag">')), a = a.replace(/$/, "</i>"), r.value = a, r.focus(), remCt(geId("bcpKomen"), "hidden"), a = qSell(".parCmn .btn.m");
-        for (let l = 0; l < a.length; l++) a[l].disabled = !0
-      } else r.focus()
-    },
-    clrPcmn = () => {
-      let e = geId("cod-K");
-      e.value = "", e.focus(), addCt(geId("npC"), "hidden"), addCt(geId("bcpKomen"), "hidden");
-      for (let r = qSell(".parCmn .btn.m"), a = 0; a < r.length; a++) r[a].disabled = !1
-    },
-    cpyPcmn = () => {
-      geId("cod-K").select(), document.execCommand("copy"), geId("cod-K").value = "", remCt(geId("npC"), "hidden"), setTimeout((function() {
-        clrPcmn()
-      }), 1e3)
-    },
-    repText = e => {
-      let r = geId(e);
-      if (r) {
-        let a = r.innerHTML;
-        a = (a = a.replace(/<i rel="image">(.*?)<\/i>/gi, '<img class="lazy" data-src="$1" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image Comment" \/>')).replace(/<i rel="pre">(.*?)<\/i>/gi, '<div class="pre"><pre>$1</pre></div>'), r.innerHTML = a
-      }
-    };
-  repText("cmHolder");
 
-  /* Comments url in new tab */ 
-  qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"extL")}));
+}, 0);
 
-  /*TimeAgo Comment*/
+/* parse Comment */ 
+var cmnParse = e => {
+    let r = geId("cod-K"),
+      a = r.value.replace(/\t/g, "    "),
+      t = e.getAttribute("data-text");
+    if ("" != r.value) {
+      "pre" == t || "code" == t ? (a = a.replace(/&/g, "&amp;").replace(/'/g, "&#039;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), a = "pre" == t ? a.replace(/^/, '<i rel="pre">') : a.replace(/^/, '<i rel="code">')) : "image" == t ? a = a.replace(/^/, '<i rel="image">') : "quote" == t ? a = a.replace(/^/, '<i rel="quote">') : "tag" == t && (a = a.replace(/^/, '<i rel="tag">')), a = a.replace(/$/, "</i>"), r.value = a, r.focus(), remCt(geId("bcpKomen"), "hidden"), a = qSell(".parCmn .btn.m");
+      for (let l = 0; l < a.length; l++) a[l].disabled = !0
+    } else r.focus()
+  },
+  clrPcmn = () => {
+    let e = geId("cod-K");
+    e.value = "", e.focus(), addCt(geId("npC"), "hidden"), addCt(geId("bcpKomen"), "hidden");
+    for (let r = qSell(".parCmn .btn.m"), a = 0; a < r.length; a++) r[a].disabled = !1
+  },
+  cpyPcmn = () => {
+    geId("cod-K").select(), document.execCommand("copy"), geId("cod-K").value = "", remCt(geId("npC"), "hidden"), setTimeout((function() {
+      clrPcmn()
+    }), 1e3)
+  },
+  repText = e => {
+    let r = geId(e);
+    if (r) {
+      let a = r.innerHTML;
+      a = (a = a.replace(/<i rel="image">(.*?)<\/i>/gi, '<img class="lazy" data-src="$1" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image Comment" \/>')).replace(/<i rel="pre">(.*?)<\/i>/gi, '<div class="pre"><pre>$1</pre></div>'), r.innerHTML = a
+    }
+  };
+repText("cmHolder");
+
+/* Comments url in new tab */ 
+qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"extL")}));
+
+/*TimeAgo Comment*/
+setTimeout(()=> {
   let dtTm = qSell(".dtTm");
   dtTm.forEach((el)=> {
-  	el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
+    el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
   });
 }, 1000);
-
 
 /*lazy yt click thumnail*/
 for(let e=qSell(".lazyYt"),t=0;t<e.length;t++){let a="https://img.youtube.com/vi_webp/"+e[t].dataset.embed+"/sddefault.webp",l=new Image();addCt(l,"lazy"),setAttr(l,"data-src",a),setAttr(l,"src","data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="),setAttr(l,"alt","Youtube video"),l.addEventListener("load",void e[t].appendChild(l)),e[t].addEventListener("click",(function(){let e=document.createElement("iframe");e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen",""),e.setAttribute("src","https://play.google.com/video/lava/web/player/yt:movie:"+this.dataset.embed+"?autoplay=1&amp;authuser=0&amp;embed=play"),this.innerHTML="",this.appendChild(e)}))}
@@ -609,8 +616,6 @@ r(t.homePgUrl.replace(/\/$/, "") + "/feeds/posts/summary" + rpLabel + "?alt=json
 }
 /* --- end isSingleItem --- */
 
-
-Defer.dom(".lazy", 100, "loaded", null, {rootMargin: "1px"});
 
 
 if(ARtb.infiniteScroll){
