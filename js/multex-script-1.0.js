@@ -43,7 +43,7 @@ var timeAgo = (e, xmp)=> {
         let xVal = Math.floor(tVal / (xTime[(xTime.length - (aa + 1))] - 1));
         if (xVal > 1) {
           //about * *** ago
-          return aTime[3] + xVal + ' ' + aTime[1][xTime.length - aa] + aTime[5];
+          return aTime[3] + xVal + ' ' + aTime[1][(xTime.length + 1) - (aa + 1)] + aTime[5];
         } else {
           return aTime[4] + aTime[0][xTime.length - (aa + 1)] + aTime[5]
           break;
