@@ -1,17 +1,13 @@
 /*<![CDATA[*/console.log('script loaded...');
 /*TimeAgo by Aruf*/
-var timeAgo = (e, xmp)=> {
+const timeAgo = (e, xmp)=> {
   let xTime = [60000, 3600000, 86400000, 604800000, 2629800000, 31557600000],
-  aTime=[
+  aTime="undefined"!=typeof timeLang ? timeLang : [
     ["minute","hour","day","week","month","year"],
-    ["seconds","minutes","hours","days","weeks","months","years"],
+    ["minutes","hours","days","weeks","months","years","seconds"],
     "right now","about ","about a "," ago","Today at "," AM"," PM"
   ],
   tVal = Date.now() - e;
-
-  if(""!=timeLang){
-    aTime = timeLang;
-  }
 
   if ((tVal) < 60000) {
     let xStm = parseInt(tVal/1000);
@@ -19,7 +15,7 @@ var timeAgo = (e, xmp)=> {
     if(xStm < 2){
       return aTime[2];
     }else{
-      return xStm + " "+ aTime[1][0] + aTime[5];
+      return xStm + " "+ aTime[1][6] + aTime[5];
     }
 
   }
@@ -43,7 +39,7 @@ var timeAgo = (e, xmp)=> {
         let xVal = Math.floor(tVal / (xTime[(xTime.length - (aa + 1))] - 1));
         if (xVal > 1) {
           //about * *** ago
-          return aTime[3] + xVal + ' ' + aTime[1][(xTime.length + 1) - (aa + 1)] + aTime[5];
+          return aTime[3] + xVal + ' ' + aTime[1][xTime.length - (aa + 1)] + aTime[5];
         } else {
           return aTime[4] + aTime[0][xTime.length - (aa + 1)] + aTime[5]
           break;
