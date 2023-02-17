@@ -1,8 +1,13 @@
 /*<![CDATA[*/console.log('script loaded...');
 /*TimeAgo by Aruf*/
-const timeAgo = (e, xmp)=> {
+let xtimeLang = [
+["menit","jam","hari","minggu","bulan","tahun"],
+["detik","menit","jam","hari","minggu","bulan","tahun"],
+"baru saja","","satu "," yang lalu","Hari ini pukul "," AM"," PM"];
+
+const xtimeAgo = (e, xmp)=> {
   let xTime = [60000, 3600000, 86400000, 604800000, 2629800000, 31557600000],
-  aTime="undefined"!=typeof timeLang ? timeLang : [
+  aTime="undefined"!=typeof xtimeLang ? xtimeLang : [
     ["minute","hour","day","week","month","year"],
     ["minutes","hours","days","weeks","months","years","seconds"],
     "right now","about ","about a "," ago","Today at "," AM"," PM"
@@ -447,13 +452,11 @@ repText("cmHolder");
 /* Comments url in new tab */ 
 qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"extL")}));
 
-setTimeout(()=> {
-	/*TimeAgo Comment*/
-	let dtTm = qSell(".dtTm");
-	dtTm.forEach((el)=> {
-	  el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
-	});
-}, 0);
+/*TimeAgo Comment*/
+let dtTm = qSell(".dtTm");
+dtTm.forEach((el)=> {
+  el.innerHTML = xtimeAgo(Date.parse(el.getAttribute("data-datetime")));
+});
 
 /*lazy yt click thumnail*/
 for(let e=qSell(".lazyYt"),t=0;t<e.length;t++){let a="https://img.youtube.com/vi_webp/"+e[t].dataset.embed+"/sddefault.webp",l=new Image();addCt(l,"lazy"),setAttr(l,"data-src",a),setAttr(l,"src","data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="),setAttr(l,"alt","Youtube video"),l.addEventListener("load",void e[t].appendChild(l)),e[t].addEventListener("click",(function(){let e=document.createElement("iframe");e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen",""),e.setAttribute("src","https://play.google.com/video/lava/web/player/yt:movie:"+this.dataset.embed+"?autoplay=1&amp;authuser=0&amp;embed=play"),this.innerHTML="",this.appendChild(e)}))}
