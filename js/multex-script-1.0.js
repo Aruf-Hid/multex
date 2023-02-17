@@ -358,7 +358,6 @@ setTimeout(()=> {
   	xFcm = gCls("cmFrm")[0];
   	rpTo.forEach((el)=> {
   		el.addEventListener("click", ()=> {
-  			console.log('balas komentar...')
   			let d = el.getAttribute("data-reply-to");
   			geId("c" + d).appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd", ifrCmn.src = ifSrc + "&parentID=" + d	
   		})
@@ -367,8 +366,6 @@ setTimeout(()=> {
   	  xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
   	}))
   }
-
-
 }, 0);
 
 /* parse Comment */ 
@@ -404,12 +401,10 @@ repText("cmHolder");
 qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"extL")}));
 
 /*TimeAgo Comment*/
-setTimeout(()=> {
-  let dtTm = qSell(".dtTm");
-  dtTm.forEach((el)=> {
-    el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
-  });
-}, 1000);
+let dtTm = qSell(".dtTm");
+dtTm.forEach((el)=> {
+  el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
+});
 
 /*lazy yt click thumnail*/
 for(let e=qSell(".lazyYt"),t=0;t<e.length;t++){let a="https://img.youtube.com/vi_webp/"+e[t].dataset.embed+"/sddefault.webp",l=new Image();addCt(l,"lazy"),setAttr(l,"data-src",a),setAttr(l,"src","data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="),setAttr(l,"alt","Youtube video"),l.addEventListener("load",void e[t].appendChild(l)),e[t].addEventListener("click",(function(){let e=document.createElement("iframe");e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen",""),e.setAttribute("src","https://play.google.com/video/lava/web/player/yt:movie:"+this.dataset.embed+"?autoplay=1&amp;authuser=0&amp;embed=play"),this.innerHTML="",this.appendChild(e)}))}
