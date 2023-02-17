@@ -1,13 +1,8 @@
 /*<![CDATA[*/console.log('script loaded...');
 /*TimeAgo by Aruf*/
-let xtimeLang = [
-["menit","jam","hari","minggu","bulan","tahun"],
-["detik","menit","jam","hari","minggu","bulan","tahun"],
-"baru saja","","satu "," yang lalu","Hari ini pukul "," AM"," PM"];
-
-const xtimeAgo = (e, xmp)=> {
+const timeAgo = function(e, xmp) {
   let xTime = [60000, 3600000, 86400000, 604800000, 2629800000, 31557600000],
-  aTime="undefined"!=typeof xtimeLang ? xtimeLang : [
+  aTime="undefined"!=typeof timeLang ? timeLang : [
     ["minute","hour","day","week","month","year"],
     ["minutes","hours","days","weeks","months","years","seconds"],
     "right now","about ","about a "," ago","Today at "," AM"," PM"
@@ -455,7 +450,7 @@ qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"e
 /*TimeAgo Comment*/
 let dtTm = qSell(".dtTm");
 dtTm.forEach((el)=> {
-  el.innerHTML = xtimeAgo(Date.parse(el.getAttribute("data-datetime")));
+  el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
 });
 
 /*lazy yt click thumnail*/
