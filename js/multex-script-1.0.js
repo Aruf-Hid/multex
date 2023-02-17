@@ -349,24 +349,20 @@ class TableOfContents{constructor({from:e,to:t}){this.fromElement=e,this.toEleme
 /*iframe & content Comment*/
 let ifrCmn = geId("comment-editor");
 if(ifrCmn!=null){
-	console.log("ada iframe komentar...");
   let ifSrc = ifrCmn.getAttribute("data-src"),
-    rpTo = gCls("rpTo"),
-    cmnFm = geId("commentForm"),
-    addCm = geId("addCm"),
-    xFcm = gCls("cmFrm")[0],
-    c = (e,t,m,n)=> {
-      e.addEventListener("click", (()=> {
-      	console.log("klik balas..");
-        let d = e.getAttribute("data-reply-to");
-        geId("c" + d).appendChild(t), cmnFm.className = "cmRbox", addCm.className = "cmAd", m.src = n + "&parentID=" + d
-      }))
-    };
-
-  for (i = 0; i < rpTo.length; i++) c(rpTo[i], cmnFm, ifrCmn, ifSrc);
-  addCm.addEventListener("click", (()=> {
-    xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
-  }))
+	rpTo = qSell(".rpTo"),
+	cmnFm = geId("commentForm"),
+	addCm = geId("addCm"),
+	xFcm = gCls("cmFrm")[0];
+	rpTo.forEach((el)=> {
+		el.addEventListener("click", ()=> {
+			let d = el.getAttribute("data-reply-to");
+			geId("c" + d).appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd", ifrCmn.src = ifSrc + "&parentID=" + d	
+		})
+	});
+	addCm.addEventListener("click", (()=> {
+	  xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
+	}))
 }
 
 /* parse Comment */ 
