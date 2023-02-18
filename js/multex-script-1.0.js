@@ -364,7 +364,10 @@ setTimeout(()=> {
   	});
   	addCm.addEventListener("click", (()=> {
   	  xFcm.appendChild(cmnFm), cmnFm.className = "cmRbox", addCm.className = "cmAd hidden", ifrCmn.src = ifSrc
-  	}))
+  	}));
+
+  	/*resize iframe*/
+  	let displayMessage=function(e){if("https://www.blogger.com"==e.origin&&0==e.data.indexOf("set-comment-editor-height")){let t=document.getElementById("comment-editor"),d=e.data.substring(26).replace("px","");t.height=d}};window.addEventListener("blur",(()=>{let e=geId("comment-editor");document.activeElement==e&&window.addEventListener("message",displayMessage)}));
   }
 }, 0);
 
