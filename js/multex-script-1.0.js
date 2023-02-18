@@ -405,9 +405,10 @@ qSell(".cmBd .cmCo a").forEach((t=>{t.setAttribute("target","_blank"),addCt(t,"e
 
 /*TimeAgo Comment*/
 let dtTm = qSell(".dtTm");
-dtTm.forEach((el)=> {
-  el.innerHTML = timeAgo(Date.parse(el.getAttribute("data-datetime")));
-});
+dtTm.forEach((t => {
+	let e = timeAgo(Date.parse(t.getAttribute("data-datetime")));
+	null != e && (t.innerHTML = e)
+}));
 
 /*lazy yt click thumnail*/
 for(let e=qSell(".lazyYt"),t=0;t<e.length;t++){let a="https://img.youtube.com/vi_webp/"+e[t].dataset.embed+"/sddefault.webp",l=new Image();addCt(l,"lazy"),setAttr(l,"data-src",a),setAttr(l,"src","data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="),setAttr(l,"alt","Youtube video"),l.addEventListener("load",void e[t].appendChild(l)),e[t].addEventListener("click",(function(){let e=document.createElement("iframe");e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen",""),e.setAttribute("src","https://play.google.com/video/lava/web/player/yt:movie:"+this.dataset.embed+"?autoplay=1&amp;authuser=0&amp;embed=play"),this.innerHTML="",this.appendChild(e)}))}
