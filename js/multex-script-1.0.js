@@ -395,7 +395,7 @@ var cmnParse = e => {
     let r = geId(e);
     if (r) {
       let a = r.innerHTML;
-      a = (a = a.replace(/<i rel="image">(.*?)<\/i>/gi, '<img data-src="$1" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image Comment" \/>')).replace(/<i rel="pre">(.*?)<\/i>/gi, '<div class="pre"><pre>$1</pre></div>'), r.innerHTML = a
+      a = (a = a.replace(/<i rel="image">(.*?)<\/i>/gi, '<img data-src="$1" src="data:image/webp;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image Comment" \/>')).replace(/<i rel="pre">(.*?)<\/i>/gi, '<div class="pre"><pre>$1</pre></div>'), r.innerHTML = a
     }
   };
 repText("cmHolder");
@@ -411,7 +411,7 @@ dtTm.forEach((t => {
 }));
 
 /*lazy yt click thumnail*/
-for(let e=qSell(".lazyYt"),t=0;t<e.length;t++){let a="https://img.youtube.com/vi_webp/"+e[t].dataset.embed+"/sddefault.webp",l=new Image();setAttr(l,"data-src",a),setAttr(l,"src","data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="),setAttr(l,"alt","Youtube video"),l.addEventListener("load",void e[t].appendChild(l)),e[t].addEventListener("click",(function(){let e=document.createElement("iframe");e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen",""),e.setAttribute("src","https://play.google.com/video/lava/web/player/yt:movie:"+this.dataset.embed+"?autoplay=1&amp;authuser=0&amp;embed=play"),this.innerHTML="",this.appendChild(e)}))}
+for(let e=qSell(".lazyYt"),t=0;t<e.length;t++){let a="https://img.youtube.com/vi_webp/"+e[t].dataset.embed+"/sddefault.webp",l=new Image();setAttr(l,"data-src",a),setAttr(l,"src","data:image/webp;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="),setAttr(l,"alt","Youtube video"),l.addEventListener("load",void e[t].appendChild(l)),e[t].addEventListener("click",(function(){let e=document.createElement("iframe");e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen",""),e.setAttribute("src","https://play.google.com/video/lava/web/player/yt:movie:"+this.dataset.embed+"?autoplay=1&amp;authuser=0&amp;embed=play"),this.innerHTML="",this.appendChild(e)}))}
 /* Active Table of Content */
 null!=geId("toContent")&&document.addEventListener("DOMContentLoaded",(()=>new TableOfContents({from:qSel("#postBody"),to:geId("toContent")}).generateToc()));
 /* pre Double Click to Copy*/
