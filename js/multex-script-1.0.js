@@ -1,4 +1,11 @@
 /*<![CDATA[*/console.log('script loaded...');
+
+/*change img url + number*/
+const sRwImg=(e,n)=>{let u=e.getAttribute(n),t=u.substr(u.length-20);(t.includes("-p-k-no-nu")||u.includes("-p-k-no-nu/")||t.includes("=w600-h337-pd"))&&!u.includes("-e30-rw")&&(u=t.includes("=w600-h337-pd")?u.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):u.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.setAttribute(n,u))},
+imgPsRw=()=>{let t=qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[bm-img]");for(let l=0;l<t.length;l++){let a=t[l],e=a.getAttribute("data-src"),g=a.getAttribute("data-style");xC=a.getAttribute("bm-img"),null!=e?sRwImg(a,"data-src"):null!=g?sRwImg(a,"data-style"):null!=xC&&sRwImg(a,"bm-img")}},
+dtNumb=()=>{let t=qSell("span[drt-count], span[dt-sold], .cmnt[data-text]");if(t.length>0)for(let e=0;e<t.length;e++){let l=t[e],n=l.innerText,r=getAttr(l,"drt-count"),a=getAttr(l,"dt-val"),d=getAttr(l,"dt-sold"),A=getAttr(l,"data-text");""==r?(setAttr(l,"drt-count",n),l.innerText=xAR.abv(n)):null!=d&&null==a?(setAttr(l,"dt-val",n),l.innerText=xAR.abv(n,1)):null!=A&&null==a&&(setAttr(l,"dt-val",A),setAttr(l,"data-text",xAR.abv(A,1)))}};
+imgPsRw();dtNumb();
+
 /*TimeAgo by Aruf*/
 const timeAgo=(e,t)=>{let n=[6e4,36e5,864e5,6048e5,26298e5,315576e5],o="undefined"!=typeof timeLang?timeLang:[["minute","hour","day","week","month","year"],["seconds","minutes","hours","days","weeks","months","years"],"right now","about ","about a "," ago","Today at "," AM"," PM"],g=Date.now()-e;if(g<6e4){let e=parseInt(g/1e3);return e<2?o[2]:e+" "+o[1][0]+o[5]}let r=new Date,a=new Date(e);if(null!=t&&r.getDate()==a.getDate()&&g<=n[2]){let e=e=>1==e.toString().length?"0"+e.toString():e,t=()=>a.getHours()>11?o[8]:o[7];return o[6]+((a.getHours()-12)*(a.getHours()>12)+a.getHours()*(a.getHours()<13))+":"+e(a.getMinutes())+t()}for(let e=0;e<n.length;e++)if(n[n.length-(e+1)]-1<g){let t=Math.floor(g/(n[n.length-(e+1)]-1));return t>1?o[3]+t+" "+o[1][n.length-e]+o[5]:o[4]+o[0][n.length-(e+1)]+o[5]}};
 
@@ -155,15 +162,6 @@ function gridMode(){xAR.sLS("list","listmode"===xAR.gLS("list")?"grid":"listmode
 ("listmode"==xAR.gLS("list")&&isMl||"listmode"==xAR.gLS("list")&&isId&&!isMl&&isMob)&&cImgpAG();
 let dF=new Date(),nF=dF.getFullYear();geId("getYear").innerHTML=nF;
 /*Private Blog Notif*/1==isPvb&&toastNotif(blogTtl+" Blog is Private.");
-
-
-/*change img url*/
-const sRwImg=(e,n)=>{let u=e.getAttribute(n),t=u.substr(u.length-20);(t.includes("-p-k-no-nu")||u.includes("-p-k-no-nu/")||t.includes("=w600-h337-pd"))&&!u.includes("-e30-rw")&&(u=t.includes("=w600-h337-pd")?u.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):u.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.setAttribute(n,u))},
-imgPsRw=()=>{let t=qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[bm-img]");for(let l=0;l<t.length;l++){let a=t[l],e=a.getAttribute("data-src"),g=a.getAttribute("data-style");xC=a.getAttribute("bm-img"),null!=e?sRwImg(a,"data-src"):null!=g?sRwImg(a,"data-style"):null!=xC&&sRwImg(a,"bm-img")}},
-dtNumb=()=>{let t=qSell("span[drt-count], span[dt-sold], .cmnt[data-text]");if(t.length>0)for(let e=0;e<t.length;e++){let l=t[e],n=l.innerText,r=getAttr(l,"drt-count"),a=getAttr(l,"dt-val"),d=getAttr(l,"dt-sold"),A=getAttr(l,"data-text");""==r?(setAttr(l,"drt-count",n),l.innerText=xAR.abv(n)):null!=d&&null==a?(setAttr(l,"dt-val",n),l.innerText=xAR.abv(n,1)):null!=A&&null==a&&(setAttr(l,"dt-val",A),setAttr(l,"data-text",xAR.abv(A,1)))}};
-
-imgPsRw();dtNumb();
-
 
 /*check admin blog*/
 const _admBlg=()=>{
@@ -644,9 +642,9 @@ if(null!=qSel(".mMT")){let e=qSel(".mMT .days"),t=qSel(".mMT .hours"),n=qSel(".m
 
 
 
-/**conf translate**/function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:ARtb.gTranslate.pageLang,includedLanguages:ARtb.gTranslate.includedLangs,layout:google.translate.TranslateElement.InlineLayout.SIMPLE},"google_translate_element")}
-/*conf analytics*/function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config",ARtb.analytics.propertyID)
+// /**conf translate**/function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:ARtb.gTranslate.pageLang,includedLanguages:ARtb.gTranslate.includedLangs,layout:google.translate.TranslateElement.InlineLayout.SIMPLE},"google_translate_element")}
+// /*conf analytics*/function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config",ARtb.analytics.propertyID)
 /*Push adSense*/
-if(ARtb.adSense.enable)for(let e=qSell("ins.adsbygoogle"),l=0;l<e.length;l++)e[l]&&(adsbygoogle=window.adsbygoogle||[]).push({});
+// if(ARtb.adSense.enable)for(let e=qSell("ins.adsbygoogle"),l=0;l<e.length;l++)e[l]&&(adsbygoogle=window.adsbygoogle||[]).push({});
 
 /*]]>*/
