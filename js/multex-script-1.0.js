@@ -642,9 +642,10 @@ if(null!=qSel(".mMT")){let e=qSel(".mMT .days"),t=qSel(".mMT .hours"),n=qSel(".m
 
 
 /*Google Translate*/
-function gtsInit(){let l=""!=qSel("html").lang?qSel("html").lang:"auto";new google.translate.TranslateElement({pageLanguage:l,layout:google.translate.TranslateElement.InlineLayout.VERTICAL},"gtsEl")}
 
 if(geId("isGts")!=null){
+  function gtsInit(){let l=""!=qSel("html").lang?qSel("html").lang:"auto";new google.translate.TranslateElement({pageLanguage:l,layout:google.translate.TranslateElement.InlineLayout.VERTICAL},"gtsEl")}
+
   let cGts = xAR.gC("googtrans");
   let xLang = ""!=qSel("html").lang?qSel("html").lang:"auto";
   if(cGts!=null && cGts != ("/"+xLang+"/"+xLang)){
