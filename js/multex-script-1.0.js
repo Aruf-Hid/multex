@@ -1,8 +1,7 @@
 /*<![CDATA[*/console.log('script loaded...');
 
 /*change img url + number*/
-const sRwImg=(e,n)=>{let u=e.getAttribute(n),t=u.substr(u.length-20);(t.includes("-p-k-no-nu")||u.includes("-p-k-no-nu/")||t.includes("=w600-h337-pd"))&&!u.includes("-e30-rw")&&(u=t.includes("=w600-h337-pd")?u.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):u.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.setAttribute(n,u))},
-imgPsRw=()=>{let t=qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[bm-img]");for(let l=0;l<t.length;l++){let a=t[l],e=a.getAttribute("data-src"),g=a.getAttribute("data-style");xC=a.getAttribute("bm-img"),null!=e?sRwImg(a,"data-src"):null!=g?sRwImg(a,"data-style"):null!=xC&&sRwImg(a,"bm-img")}},
+const imgPsRw=()=>{let t=(t,e)=>{let l=t.getAttribute(e),n=l.substr(l.length-20);(n.includes("-p-k-no-nu")||l.includes("-p-k-no-nu/")||n.includes("=w600-h337-pd"))&&!l.includes("-e30-rw")&&(l=n.includes("=w600-h337-pd")?l.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):l.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),t.setAttribute(e,l))},e=qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[bm-img]");for(let l=0;l<e.length;l++){let n=e[l],d=n.getAttribute("data-src"),i=n.getAttribute("data-style");xC=n.getAttribute("bm-img"),null!=d?t(n,"data-src"):null!=i?t(n,"data-style"):null!=xC&&t(n,"bm-img")}},
 dtNumb=()=>{let t=qSell("span[drt-count], span[dt-sold], .cmnt[data-text]");if(t.length>0)for(let e=0;e<t.length;e++){let l=t[e],n=l.innerText,r=getAttr(l,"drt-count"),a=getAttr(l,"dt-val"),d=getAttr(l,"dt-sold"),A=getAttr(l,"data-text");""==r?(setAttr(l,"drt-count",n),l.innerText=xAR.abv(n)):null!=d&&null==a?(setAttr(l,"dt-val",n),l.innerText=xAR.abv(n,1)):null!=A&&null==a&&(setAttr(l,"dt-val",A),setAttr(l,"data-text",xAR.abv(A,1)))}};
 imgPsRw();dtNumb();
 
@@ -157,7 +156,7 @@ null!=xAR.gLS("mode")&&("darkmode"==xAR.gLS("mode")?(thmC=themeCdrk,qSel("body")
 isId&&("listmode"===xAR.gLS("list")?qSel("#mainCont").classList.add("grD"):qSel("#mainCont").classList.remove("grD"));
 
 function darkMode(){let e;qSel("body").classList.contains("drK")?(qSel("body").classList.remove("drK"),xAR.rLS("mode"),e=themeC):(qSel("body").classList.add("drK"),xAR.sLS("mode","darkmode"),e=themeCdrk),thmC1.content=e,thmC2.content=e,thmC3.content=e}
-function cImgpAG(){for(let l=qSell(".ntry.pApGm .imgThm, .ntry.pJob .imgThm"),m=0;m<l.length;m++){var t=l[m].getAttribute("alt-img"),i=l[m].getAttribute("s1x1-img"),e="";null!=t&&null!==i&&(e="listmode"!=xAR.gLS("list")?i:t,isHm&&!isMob&&(e=t),""!=e&&(l[m].setAttribute("src",e),l[m].setAttribute("data-src",e)))}}
+function cImgpAG(){for(let l=qSell(".ntry.pApGm .imgThm, .ntry.pJob .imgThm"),m=0;m<l.length;m++){var t=l[m].getAttribute("data-img"),i=l[m].getAttribute("data-icon"),e="";null!=t&&null!==i&&(e="listmode"!=xAR.gLS("list")?i:t,isHm&&!isMob&&(e=t),""!=e&&(l[m].setAttribute("src",e),l[m].setAttribute("data-src",e)))}}
 function gridMode(){xAR.sLS("list","listmode"===xAR.gLS("list")?"grid":"listmode"),"listmode"===xAR.gLS("list")?qSel("#mainCont").classList.add("grD"):qSel("#mainCont").classList.remove("grD"),cImgpAG()}
 ("listmode"==xAR.gLS("list")&&isMl||"listmode"==xAR.gLS("list")&&isId&&!isMl&&isMob)&&cImgpAG();
 let dF=new Date(),nF=dF.getFullYear();geId("getYear").innerHTML=nF;
@@ -184,7 +183,6 @@ let dF=new Date(),nF=dF.getFullYear();geId("getYear").innerHTML=nF;
 	  }
 	});
 })();
-
 
 
 /* --- isHomepage begin --- */
