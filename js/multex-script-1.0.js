@@ -646,16 +646,21 @@ if(null!=qSel(".mMT")){let e=qSel(".mMT .days"),t=qSel(".mMT .hours"),n=qSel(".m
 if(geId("isGts")!=null){
   let cGts = xAR.gC("googtrans");
   let xLang = ""!=qSel("html").lang?qSel("html").lang:"auto";
+  let _googtrans = ()=>{Defer.js("//translate.google.com/translate_a/element.js?cb=gtsInit","G-Translate",0,(function(){qSel("#gTs .xLoading").remove()}),0)};
+  
   if(cGts!=null && cGts != ("/"+xLang+"/"+xLang)){
     _googtrans()
   }else{
     geId("isGts").addEventListener("click", _googtrans);
   }
 
-  let gtsInit = () => {
-  	console.log('bahasa gts : '+xLang);
-  	new google.translate.TranslateElement({pageLanguage:xLang,layout:google.translate.TranslateElement.InlineLayout.VERTICAL},"gtsEl")};
-  function _googtrans(){Defer.js("//translate.google.com/translate_a/element.js?cb=gtsInit","G-Translate",0,(function(){qSel("#gTs .xLoading").remove()}),0)}
+  function gtsInit() {
+  	console.log('bahasa gts : ' + xLang);
+  	new google.translate.TranslateElement({
+  		pageLanguage: xLang,
+  		layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  	}, "gtsEl")
+  }
 }
 
 // /**conf translate**/function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:ARtb.gTranslate.pageLang,includedLanguages:ARtb.gTranslate.includedLangs,layout:google.translate.TranslateElement.InlineLayout.SIMPLE},"google_translate_element")}
