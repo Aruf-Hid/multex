@@ -652,7 +652,9 @@ if(geId("isGts")!=null){
     geId("isGts").addEventListener("click", _googtrans);
   }
 
-  function gtsInit(){new google.translate.TranslateElement({pageLanguage:xLang,layout:google.translate.TranslateElement.InlineLayout.VERTICAL},"gtsEl")}
+  let gtsInit = () => {
+  	console.log('bahasa gts : '+xLang);
+  	new google.translate.TranslateElement({pageLanguage:xLang,layout:google.translate.TranslateElement.InlineLayout.VERTICAL},"gtsEl")};
   function _googtrans(){Defer.js("//translate.google.com/translate_a/element.js?cb=gtsInit","G-Translate",0,(function(){qSel("#gTs .xLoading").remove()}),0)}
 }
 
