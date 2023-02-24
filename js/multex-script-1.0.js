@@ -1,8 +1,7 @@
 /*<![CDATA[*/console.log('script loaded...');
 
 /*change img url + number*/
-const sRwImg=(e,n)=>{let u=e.getAttribute(n),t=u.substr(u.length-20);(t.includes("-p-k-no-nu")||u.includes("-p-k-no-nu/")||t.includes("=w600-h337-pd"))&&!u.includes("-e30-rw")&&(u=t.includes("=w600-h337-pd")?u.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):u.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.setAttribute(n,u))},
-imgPsRw=()=>{let t=qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[bm-img]");for(let l=0;l<t.length;l++){let a=t[l],e=a.getAttribute("data-src"),g=a.getAttribute("data-style");xC=a.getAttribute("bm-img"),null!=e?sRwImg(a,"data-src"):null!=g?sRwImg(a,"data-style"):null!=xC&&sRwImg(a,"bm-img")}},
+const imgPsRw=()=>{const e=["src","icon","img","style","bimg"],l=(e,l)=>{let t=e.dataset[l],n=t.substr(t.length-20);(n.includes("-p-k-no-nu")||t.includes("-p-k-no-nu/")||n.includes("=w600-h337-pd"))&&!t.includes("-e30-rw")&&(t=n.includes("=w600-h337-pd")?t.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):t.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.dataset[l]=t)};qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[bimg]").forEach((t=>{let n=t.dataset[e[0]],a=t.dataset[e[1]],s=t.dataset[e[2]],d=t.dataset[e[3]],u=t.dataset[e[4]];null!=n?(l(t,e[0]),null!=s&&l(t,e[1]),null!=a&&l(t,e[2])):null!=d?l(t,e[3]):null!=u&&l(t,e[4])}))},
 dtNumb=()=>{let t=qSell("span[drt-count], span[dt-sold], .cmnt[data-text]");if(t.length>0)for(let e=0;e<t.length;e++){let l=t[e],n=l.innerText,r=getAttr(l,"drt-count"),a=getAttr(l,"dt-val"),d=getAttr(l,"dt-sold"),A=getAttr(l,"data-text");""==r?(setAttr(l,"drt-count",n),l.innerText=xAR.abv(n)):null!=d&&null==a?(setAttr(l,"dt-val",n),l.innerText=xAR.abv(n,1)):null!=A&&null==a&&(setAttr(l,"dt-val",A),setAttr(l,"data-text",xAR.abv(A,1)))}};
 imgPsRw();dtNumb();
 
