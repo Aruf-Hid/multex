@@ -1,8 +1,8 @@
 /*<![CDATA[*/console.log('script loaded...');
 
 /*change img url + number*/
-const imgPsRw=()=>{const e=["src","icon","img","style","bimg"],l=(e,l)=>{let t=e.dataset[l],n=t.substr(t.length-20);(n.includes("-p-k-no-nu")||t.includes("-p-k-no-nu/")||n.includes("=w600-h337-pd"))&&!t.includes("-e30-rw")&&(t=n.includes("=w600-h337-pd")?t.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):t.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.dataset[l]=t)};qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[bimg]").forEach((t=>{let n=t.dataset[e[0]],a=t.dataset[e[1]],s=t.dataset[e[2]],d=t.dataset[e[3]],u=t.dataset[e[4]];null!=n?(l(t,e[0]),null!=s&&l(t,e[1]),null!=a&&l(t,e[2])):null!=d?l(t,e[3]):null!=u&&l(t,e[4])}))},
-dtNumb=()=>{let t=qSell("span[drt-count], span[dt-sold], .cmnt[data-text]");if(t.length>0)for(let e=0;e<t.length;e++){let l=t[e],n=l.innerText,r=getAttr(l,"drt-count"),a=getAttr(l,"dt-val"),d=getAttr(l,"dt-sold"),A=getAttr(l,"data-text");""==r?(setAttr(l,"drt-count",n),l.innerText=xAR.abv(n)):null!=d&&null==a?(setAttr(l,"dt-val",n),l.innerText=xAR.abv(n,1)):null!=A&&null==a&&(setAttr(l,"dt-val",A),setAttr(l,"data-text",xAR.abv(A,1)))}};
+const imgPsRw=()=>{const e=["src","icon","img","style","bimg"],l=(e,l)=>{let t=e.dataset[l],n=t.substr(t.length-20);(n.includes("-p-k-no-nu")||t.includes("-p-k-no-nu/")||n.includes("=w600-h337-pd"))&&!t.includes("-e30-rw")&&(t=n.includes("=w600-h337-pd")?t.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):t.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.dataset[l]=t)};qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[data-bimg]").forEach((t=>{let n=t.dataset[e[0]],a=t.dataset[e[1]],s=t.dataset[e[2]],d=t.dataset[e[3]],u=t.dataset[e[4]];null!=n?(l(t,e[0]),null!=s&&l(t,e[1]),null!=a&&l(t,e[2])):null!=d?l(t,e[3]):null!=u&&l(t,e[4])}))},
+dtNumb=()=>{qSell("span[data-count], span[data-sold], .cmnt[data-text]").forEach((t=>{let a=t.textContent,e=t.dataset.count,l=t.dataset.sold,n=t.dataset.val,d=t.dataset.text;""==e?(t.dataset.count=a,t.textContent=xAR.abv(a)):null!=l&&null==n?(t.dataset.val=a,t.textContent=xAR.abv(a,1)):null!=d&&null==n&&(t.dataset.val=d,t.dataset.text=xAR.abv(d,1))}))};
 imgPsRw();dtNumb();
 
 /*TimeAgo by Aruf*/
@@ -249,7 +249,7 @@ function _psByLbl(){
 	        
 	        let pTtl = psTtl,
 	            pThumb = "",
-	            pRate = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ psRate("v") +'"></span></span></g-review-stars> <span>'+ psRate("v") +'</span> · ‎<span drt-count="'+ psRate() +'">'+ xAR.abv(psRate()) +'</span></div>',
+	            pRate = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ psRate("v") +'"></span></span></g-review-stars> <span>'+ psRate("v") +'</span> · ‎<span data-count="'+ psRate() +'">'+ xAR.abv(psRate()) +'</span></div>',
 	            pUpd = dtUpd.month()+" "+dtUpd.day()+", "+dtUpd.year(),
 	            pDate = "",
 	            clsYt = "",
@@ -554,7 +554,7 @@ arRelatedPosts = function(e) {
       17==pHr||5==pHr?rtVal="5.0":pHr<12?rtVal="3."+pMt:rtVal="4."+pMt;
 
       if(psAG){
-        psRating = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ rtVal +'"></span></span></g-review-stars> <span>'+ rtVal +'</span> · ‎<span drt-count="'+ rtCount +'">'+ xAR.abv(rtCount) +'</span></div>';
+        psRating = '<div class="psRt"><g-review-stars aria-hidden="true"><span class="Fam1ne tPhRLe" role="img"><span drt-val="'+ rtVal +'"></span></span></g-review-stars> <span>'+ rtVal +'</span> · ‎<span data-count="'+ rtCount +'">'+ xAR.abv(rtCount) +'</span></div>';
       }
 
       if(xAG==0){
