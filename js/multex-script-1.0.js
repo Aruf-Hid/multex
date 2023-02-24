@@ -1,7 +1,7 @@
 /*<![CDATA[*/console.log('script loaded...');
 
 /*change img url + number*/
-const imgPsRw=()=>{const e=["src","icon","img","style","bimg"],l=(e,l)=>{let t=e.dataset[l],n=t.substr(t.length-20);(n.includes("-p-k-no-nu")||t.includes("-p-k-no-nu/")||n.includes("=w600-h337-pd"))&&!t.includes("-e30-rw")&&(t=n.includes("=w600-h337-pd")?t.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):t.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.dataset[l]=t)};qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[data-bimg]").forEach((t=>{let n=t.dataset[e[0]],a=t.dataset[e[1]],s=t.dataset[e[2]],d=t.dataset[e[3]],u=t.dataset[e[4]];null!=n?(l(t,e[0]),null!=s&&l(t,e[1]),null!=a&&l(t,e[2])):null!=d?l(t,e[3]):null!=u&&l(t,e[4])}))},
+const imgPsRw=()=>{const e=["src","icon","img","style","bmimg"],l=(e,l)=>{let t=e.dataset[l],n=t.substr(t.length-20);(n.includes("-p-k-no-nu")||t.includes("-p-k-no-nu/")||n.includes("=w600-h337-pd"))&&!t.includes("-e30-rw")&&(t=n.includes("=w600-h337-pd")?t.replace("=w600-h337-pd","=w600-h337-pd-e30-rw"):t.replace("-p-k-no-nu","-p-k-no-nu-e30-rw"),e.dataset[l]=t)};qSell("img[data-src]:not([lazied]), div[data-style]:not([lazied]), .bmPs[data-bmimg]").forEach((t=>{let n=t.dataset[e[0]],a=t.dataset[e[1]],s=t.dataset[e[2]],d=t.dataset[e[3]],u=t.dataset[e[4]];null!=n?(l(t,e[0]),null!=s&&l(t,e[1]),null!=a&&l(t,e[2])):null!=d?l(t,e[3]):null!=u&&l(t,e[4])}))},
 dtNumb=()=>{qSell("span[data-count], span[data-sold], .cmnt[data-text]").forEach((t=>{let a=t.textContent,e=t.dataset.count,l=t.dataset.sold,n=t.dataset.val,d=t.dataset.text;""==e?(t.dataset.count=a,t.textContent=xAR.abv(a)):null!=l&&null==n?(t.dataset.val=a,t.textContent=xAR.abv(a,1)):null!=d&&null==n&&(t.dataset.val=d,t.dataset.text=xAR.abv(d,1))}))};
 imgPsRw();dtNumb();
 
