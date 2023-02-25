@@ -18,7 +18,7 @@ Defer.dom("[data-src],[data-style]", 100, "loaded", null, {rootMargin: "1px"});
 xAR.sLS("xAR_script", (new Date).getTime() + 864e5);
 const ARtb = tempSet;
 
-const xAR2={
+const _arF2={
 	_Str:"mUlTeXbLoGgERtMpOcDjFWYZaChIkJnKqNsPvQwSzVx1357986420ByArufHid+/=",
 	en:e=>{var t,r,o,a,n,c,h,d="",s=0;for(e=xAR._utf8_en(e);s<e.length;)a=(t=e.charCodeAt(s++))>>2,n=(3&t)<<4|(r=e.charCodeAt(s++))>>4,c=(15&r)<<2|(o=e.charCodeAt(s++))>>6,h=63&o,isNaN(r)?c=h=64:isNaN(o)&&(h=64),d=d+xAR._Str.charAt(a)+xAR._Str.charAt(n)+xAR._Str.charAt(c)+xAR._Str.charAt(h);return d},
 	de:e=>{var t,r,o,a,n,c,h="",d=0;for(e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");d<e.length;)t=xAR._Str.indexOf(e.charAt(d++))<<2|(a=xAR._Str.indexOf(e.charAt(d++)))>>4,r=(15&a)<<4|(n=xAR._Str.indexOf(e.charAt(d++)))>>2,o=(3&n)<<6|(c=xAR._Str.indexOf(e.charAt(d++))),h+=String.fromCharCode(t),64!=n&&(h+=String.fromCharCode(r)),64!=c&&(h+=String.fromCharCode(o));return xAR._utf8_de(h)},
@@ -28,7 +28,7 @@ const xAR2={
 	xd:(e,t,r)=>xAR.de(e.substring(1)).replace(null==t?"":null==r?t:xAR.e(t),"")
 };
 
-Object.assign(xAR,xAR2);
+for(x in _arF2)ARtheme.prototype[x]=_arF2[x];
 
 
 /*BEGIN*/
